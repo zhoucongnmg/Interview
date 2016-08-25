@@ -74,9 +74,7 @@ public class SortMethod {
 		while(j <= end)
 			temp[index++] = a[j++];
 		
-		for(int k=start;k<=end;k++)
-			a[k] = temp[k-start];
-		
+		System.arraycopy(temp, 0, a, start, end-start+1);
 	}
 	
 	/**
