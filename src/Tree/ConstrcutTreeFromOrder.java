@@ -6,8 +6,8 @@ public class ConstrcutTreeFromOrder {
 		ConstrcutTreeFromOrder ct = new ConstrcutTreeFromOrder();
 		TreeOrder tr = new TreeOrder();
 		
-		int[] inorder = {2,1};
-		int[] postorder = {2,1};
+		int[] inorder = {1,2,3,4,5,10};
+		int[] postorder = {1,2,4,3,10,5};
 		tr.levelOrder(ct.buildTree(inorder, postorder));
 	}
 	
@@ -21,10 +21,10 @@ public class ConstrcutTreeFromOrder {
     public TreeNode buildTree(int[] inorder, int[] postorder) {
         if(inorder == null || postorder == null)
             return null;
-        return buildTree(inorder,0,inorder.length-1,postorder,0,postorder.length-1);
+        return buildTree(inorder,0,inorder.length-1,postorder,postorder.length-1);
     }
     
-    public TreeNode buildTree(int[] in,int instart,int inend,int[] post,int poststart,int postend){
+    public TreeNode buildTree(int[] in,int instart,int inend,int[] post,int postend){
         if(instart > inend)
             return null;
         if(instart == inend)
@@ -33,8 +33,8 @@ public class ConstrcutTreeFromOrder {
         int i = find(in,instart,inend,node.val);
         if(i == -1)
             return null;
-        node.left = buildTree(in,instart,i-1,post,poststart,poststart+i-1-instart);
-        node.right = buildTree(in,i+1,inend,post,postend-1-(inend-i-1),postend-1);
+        node.left = buildTree(in,instart,i-1,post,postend+i-1-inend);
+        node.right = buildTree(in,i+1,inend,post,postend-1);
         return node;
     }
     

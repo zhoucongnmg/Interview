@@ -1,13 +1,6 @@
 package link;
 
-/**
- * 链表常用方法
- * 
- * @author zc
- *
- */
-public class LinkSomeMethod {
-
+public class LinkSomeMethod{
 	public static void main(String[] args) {
 		LinkSomeMethod ls = new LinkSomeMethod();
 
@@ -35,11 +28,11 @@ public class LinkSomeMethod {
 		System.out.println("第一个公共节点值为：" + ls.findParent(l1, l4).val);
 		System.out.println("倒数第4个节点的值为：" + ls.findLaskKNode(l1, 4));
 		System.out.println("倒数第3个节点的值为：" + ls.findLaskKNode(l1, 3).val);
-		 System.out.println("原链表为：");
-		 ls.printLink(l1);
-		 LinkNode newHead = ls.sortList(l1);
-		 System.out.println("排序后为：");
-		 ls.printLink(newHead);
+		System.out.println("原链表为：");
+		ls.printLink(l1);
+		LinkNode newHead = ls.sortList(l1);
+		System.out.println("排序后为：");
+		ls.printLink(newHead);
 
 		LinkNode l10 = new LinkNode(1);
 		LinkNode l11 = new LinkNode(3);
@@ -114,7 +107,7 @@ public class LinkSomeMethod {
 				else
 					return node1;
 			} else
-				return null;
+			return null;
 		}
 		// 一个有环一个没环，则没有交点
 		else
@@ -150,12 +143,14 @@ public class LinkSomeMethod {
 			longLink = longLink.next;
 			k--;
 		}
+		//此处注意
 		while (longLink != node) {
 			if (longLink == slowLink)
 				return longLink;
 			longLink = longLink.next;
 			slowLink = slowLink.next;
 		}
+		//此处注意 不返回null
 		return node;
 	}
 
@@ -194,7 +189,7 @@ public class LinkSomeMethod {
 	}
 
 	/**
-	 * 合并两个有序链表
+	 * 合并两个有序链表，非递归实现
 	 */
 	public LinkNode mergeTwoLink(LinkNode head1, LinkNode head2) {
 		if (head1 == null)
@@ -218,6 +213,23 @@ public class LinkSomeMethod {
 		else
 			temp.next = head1;
 		return head.next;
+	}
+	/**
+	 *合并两个有序链表，递归实现
+	 */
+	public LinkNode mergeTwoLink1(LinkNode list1,LinkNode list2) {
+		if(list1 == null)
+			return list2;
+		if(list2 ==  null)
+			return list1;
+		if(list1.val < list2.val){
+			list1.next = mergeTwoLink(list1.next,list2);
+			return list1;
+		}
+		else{
+			list2.next = mergeTwoLink(list1,list2.next);
+			return list2;
+		}
 	}
 
 	/**
@@ -273,4 +285,5 @@ public class LinkSomeMethod {
 		}
 		System.out.println();
 	}
+
 }

@@ -58,7 +58,7 @@ public class BinarySearch {
 	}
 	
 	/**
-	 * 在一组排序数中，给定一个数，返回最接近且不大于这个数的位置
+	 * 在一组排序数中，给定一个数，返回最接近且不大于这个数的位置，如果有相同数字返回最右边的下标
 	 * @param a
 	 * @param start
 	 * @param end

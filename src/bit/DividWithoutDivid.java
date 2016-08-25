@@ -27,20 +27,22 @@ public class DividWithoutDivid {
 			sign = -1;
 		
 		//此处要注意 Math。abs里面一定要加long
-		long div1 = (long)Math.abs((long)dividend);
-		long div2 = (long)Math.abs((long)divisor);
+		long div1 = Math.abs((long)dividend);
+		long div2 = Math.abs((long)divisor);
 		long result = 0;
+		long temp = div2;
+		long cur = 1;
 		while(div1 >= div2){
-			long temp = div2;
-			long count = 1;
 			while(div1 >= temp){
 				temp <<= 1;
-				count <<= 1;
+				cur <<= 1;
 			}
 			temp >>= 1;
-			count >>= 1;
-			result += count;
+			cur >>= 1;
+			result += cur;
 			div1 -= temp;
+			cur = 1;
+			temp = div2;
 		}
 		if(sign == -1)
 			//符号取反，正号变符号，符号变正号

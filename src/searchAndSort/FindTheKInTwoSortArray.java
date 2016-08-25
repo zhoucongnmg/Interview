@@ -30,18 +30,19 @@ public class FindTheKInTwoSortArray {
 			return null;
 		
 		int i=a.length-1,j=b.length-1;
+		int temp = 0;
 		while(i>=0 && j>=0){
 			k--;
 			if(a[i] > b[j]){
-				if(k == 0)
-					return a[i];
+				temp = a[i];
 				i--;
 			}
 			else{
-				if(k == 0)
-					return b[j];
+				temp = b[j];
 				j--;
 			}
+			if(k == 0)
+				return temp;
 		}
 		if(i>=0)
 			return a[i-k+1];

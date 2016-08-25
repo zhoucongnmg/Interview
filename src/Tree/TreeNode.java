@@ -6,10 +6,10 @@ package Tree;
  *
  */
 public class TreeNode {
-	int val;
-	TreeNode left;
-	TreeNode right;
-	int popTimes = 0;
+	public int val;
+	public TreeNode left;
+	public TreeNode right;
+	public int popTimes = 0;
 	
 	public TreeNode(int val){
 		this.val = val;

@@ -9,18 +9,10 @@ public class SomeRandomMethod {
 
 	public static void main(String[] args){
 		
-		SomeRandomMethod xs = new SomeRandomMethod();
-		int[] a = {1,2,3,4,5,6,7,8,9};
-		
-		int[] re = xs.xuShuiChiChouYang(a,2);
-		for(int i : re)
-			System.out.print(i+" ");
-		
-		System.out.println();
-		
-		xs.suiJiXiPai(a);
-		for(int i : a)
-			System.out.print(i+" ");
+		double x = 3.0;
+		int y =5;
+		x/=--y;
+		System.out.println(x);
 	}
 	/**
 	 * 蓄水池抽样问题

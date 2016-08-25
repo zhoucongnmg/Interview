@@ -79,7 +79,7 @@ public class ReverseLink {
 			l = l.next;
 			n--;
 		}
-		if(l == null || l.next == null)
+		if(n > 1)
 			return head;
 		LinkNode pre = l.next, cur = l.next.next, temp = null;
 		while(cur != null && k > 0){
@@ -94,3 +94,4 @@ public class ReverseLink {
 		return h.next;
 	}
 }
+	

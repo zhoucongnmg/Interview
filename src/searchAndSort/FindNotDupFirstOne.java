@@ -18,15 +18,15 @@ public class FindNotDupFirstOne {
 	public Character find(char[] a){
 		if(a == null || a.length == 0)
 			return null;
-		Map<Character,Integer> map = new HashMap<Character,Integer>();
+		Map<Character,Boolean> map = new HashMap<Character,Boolean>();
 		for(char c : a){
 			if(map.containsKey(c))
-				map.put(c, map.get(c)+1);
+				map.put(c,true);
 			else
-				map.put(c, 1);
+				map.put(c, false);
 		}
 		for(char c : a){
-			if(map.get(c) == 1)
+			if(!map.get(c))
 				return c;
 		}
 		return null;

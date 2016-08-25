@@ -24,6 +24,7 @@ public class FindTheNK {
 		int left = findLeft(a,0,a.length-1,k);
 		if(left == -1)
 			return -1;
+		//此处注意校验
 		if(left+n-1 < a.length && a[left+n-1] == k)
 			return left+n-1;
 		return -1;
@@ -39,9 +40,8 @@ public class FindTheNK {
 	 * @return
 	 */
 	public int findLeft(int[] a,int start,int end,int k){
-		if(a == null)
-			return -1;
 		if(start > end){
+			//注意此处校验
 			if(start >= a.length)
 				return -1;
 			if(a[start] == k)
