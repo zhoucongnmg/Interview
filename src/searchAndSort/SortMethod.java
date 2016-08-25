@@ -175,7 +175,6 @@ public class SortMethod {
 			buildHeap(a,child,len);
 		}
 	}
-	
 	//交换
 	//方法中（或方法参数中）使用泛型必须1、在方法返回值前声明泛型，或者2、在类声明后面声明泛型
 	public <T> void swap(T[] a,int i,int j){
