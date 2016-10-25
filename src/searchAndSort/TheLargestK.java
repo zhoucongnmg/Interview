@@ -11,7 +11,7 @@ public class TheLargestK {
 	
 	public static void main(String[] args){
 		TheLargestK tk = new TheLargestK();
-		int[] a = {1,2,3,4,5,6,7,8};
+		int[] a = {1,2,3,3,3};
 		System.out.println(tk.qSearch(a,0,a.length-1,3));
 		int[] b = {8,7,6,5,4,3,2,1,1};
 		System.out.println(tk.qSearch(b,0,b.length-1,9));
@@ -29,10 +29,6 @@ public class TheLargestK {
 			return -1;
 		if(start >= end)
 			return a[k-1];
-		if(end - start <= 2){
-			setMid(a,start,end);
-			return a[k-1];
-		}
 		int pivot = getPivot(a,start,end);
 		if(pivot == k-1)
 			return a[k-1];
@@ -60,13 +56,16 @@ public class TheLargestK {
 		setMid(a,start,end);
 		int i = start , j = end - 2;
 		int k = a[end-1];
-		while(i < j){
+		while(i <= j){
 			while(a[i] > k)
 				i++;
 			while(a[j] < k)
 				j--;
-			if(i < j)
+			if(i < j){
 				swap(a,i,j);
+				i++;
+				j--;
+			}
 		}
 		swap(a,i,end-1);
 		return i;
