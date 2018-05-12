@@ -1,5 +1,5 @@
 package link;
-//删除链表中的重复节点
+//删除排序链表中的重复节点
 public class DeleteDupInLinkList{
 
 	//Given 1->1->2->3->3, return 1->2->3.
@@ -7,7 +7,7 @@ public class DeleteDupInLinkList{
         if(head == null || head.next == null)
             return head;
         LinkNode p = head;
-        while(p != null && p.next != null){
+        while(p.next != null){
             if(p.val == p.next.val)
                 p.next = p.next.next;
             else
@@ -25,7 +25,7 @@ public class DeleteDupInLinkList{
         while(q != null && q.next != null){
             //找到重复的最后一个节点
             //此处要注意校验
-            while(q != null && q.next != null && q.val == q.next.val)
+            while(q.next != null && q.val == q.next.val)
                 q = q.next;
             if(p.next != q){
                 p.next = q.next;
