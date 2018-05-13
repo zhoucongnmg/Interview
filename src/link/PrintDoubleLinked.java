@@ -37,8 +37,9 @@ public class PrintDoubleLinked {
 
 	// 双向链表转化为二叉树
 	public DoubleLinkedNode convertTree(DoubleLinkedNode head) {
-		if (head == null || head.next == null)
+		if (head == null || head.next == null) {
 			return head;
+		}
 		DoubleLinkedNode root = null, temp = null;
 		while (head != null) {
 			temp = head.next;
@@ -51,19 +52,22 @@ public class PrintDoubleLinked {
 	}
 
 	public DoubleLinkedNode insertNode(DoubleLinkedNode root, DoubleLinkedNode node) {
-		if (root == null)
+		if (root == null) {
 			return node;
-		if (root.val > node.val)
+		}
+		if (root.val > node.val) {
 			root.pre = insertNode(root.pre, node);
-		else
+		} else {
 			root.next = insertNode(root.next, node);
+		}
 		return root;
 	}
 
 	// 中序遍历
 	public void inOrder(DoubleLinkedNode root) {
-		if (root == null)
+		if (root == null) {
 			return;
+		}
 		inOrder(root.pre);
 		System.out.print(root.val + " ");
 		inOrder(root.next);
@@ -73,10 +77,12 @@ public class PrintDoubleLinked {
 	// 要求不能创建任何新的结点，只能调整树中结点指针的指向。
 	// 二叉树转双向链表
 	public TreeNode TreeConvertToLink(TreeNode root) {
-		if (root == null)
+		if (root == null) {
 			return null;
-		if (root.left == null && root.right == null)
+		}
+		if (root.left == null && root.right == null) {
 			return root;
+		}
 		// 将左子树转换为双向链表并返回头节点
 		TreeNode left = TreeConvertToLink(root.left);
 		TreeNode p = left;

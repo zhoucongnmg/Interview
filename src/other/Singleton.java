@@ -13,7 +13,7 @@ public class Singleton {
 		System.out.println(s1==s2);
 	}
 	
-	public static volatile Singleton instance = null; 
+	private static volatile Singleton instance = null;
 	
 	private Singleton(){
 	}
@@ -21,8 +21,9 @@ public class Singleton {
 	public static Singleton getInstance(){
 		if(instance == null){
 			synchronized(Singleton.class){
-				if(instance == null)
+				if(instance == null) {
 					instance = new Singleton();
+				}
 			}
 		}
 		return instance;
