@@ -49,7 +49,7 @@ public class FindTheNK {
         if (a == null) {
             return -1;
         }
-        if (start > end) {
+        if (start >= end) {
             //注意此处校验
             if (start >= a.length) {
                 return -1;
@@ -64,7 +64,7 @@ public class FindTheNK {
         if (a[mid] < k) {
             return findLeft(a, mid + 1, end, k);
         } else {
-            return findLeft(a, start, mid - 1, k);
+            return findLeft(a, start, mid, k);
         }
 
     }
@@ -76,7 +76,7 @@ public class FindTheNK {
         if (a == null) {
             return -1;
         }
-        if (start > end) {
+        if (start >= end) {
             if (end < 0) {
                 return -1;
             }
@@ -90,7 +90,7 @@ public class FindTheNK {
         if (a[mid] > k) {
             return findRight(a, start, mid - 1, k);
         } else {
-            return findRight(a, mid + 1, end, k);
+            return findRight(a, mid, end, k);
         }
 
     }

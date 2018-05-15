@@ -12,11 +12,11 @@ public class TheLargestK {
     public static void main(String[] args) {
         TheLargestK tk = new TheLargestK();
         int[] a = {1, 2, 3, 3, 3};
-        System.out.println(tk.qSearch(a, 0, a.length - 1, 3));
-        int[] b = {8, 7, 6, 5, 4, 3, 2, 1, 1};
-        System.out.println(tk.qSearch(b, 0, b.length - 1, 9));
-        System.out.println(tk.qSearch2(a, 3));
-        System.out.println(tk.qSearch2(b, 3));
+//        System.out.println(tk.qSearch(a, 0, a.length - 1, 3));
+        int[] b = {7, 8};
+        System.out.println(tk.qSearch(b, 0, b.length - 1, 2));
+//        System.out.println(tk.qSearch2(a, 2));
+//        System.out.println(tk.qSearch2(b, 2));
 
     }
 
@@ -30,6 +30,10 @@ public class TheLargestK {
             return -1;
         }
         if (start >= end) {
+            return a[k - 1];
+        }
+        if (end - start <= 2) {
+            setMid(a, start, end);
             return a[k - 1];
         }
         int pivot = getPivot(a, start, end);
@@ -90,7 +94,7 @@ public class TheLargestK {
         if (a == null || a.length < k) {
             return -1;
         }
-        PriorityQueue<Integer> q = new PriorityQueue<Integer>();
+        PriorityQueue<Integer> q = new PriorityQueue<>();
         for (int i : a) {
             if (q.size() == k) {
                 if (i > q.peek()) {
