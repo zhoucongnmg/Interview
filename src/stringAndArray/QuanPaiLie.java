@@ -2,6 +2,7 @@ package stringAndArray;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class QuanPaiLie {
@@ -42,22 +43,22 @@ public class QuanPaiLie {
     }
 
     //集合非空子集 非递归
-    public ArrayList<ArrayList<Integer>> getSubsets(int[] a) {
-        ArrayList<ArrayList<Integer>> re = new ArrayList<>();
+    public List<List<Integer>> getSubsets(int[] a) {
+        List<List<Integer>> re = new ArrayList<>();
         if (a == null || a.length == 0) {
             return re;
         }
         //mask = 2的a.length次方减1
         int mask = (1 << a.length) - 1;
         for (int i = mask; i > 0; i--) {
-            ArrayList<Integer> list = find(a, i);
+            List<Integer> list = find(a, i);
             re.add(list);
         }
         return re;
     }
 
-    public ArrayList<Integer> find(int[] a, int mask) {
-        ArrayList<Integer> list = new ArrayList<>();
+    public List<Integer> find(int[] a, int mask) {
+        List<Integer> list = new ArrayList<>();
         for (int i = a.length - 1; i >= 0; i--) {
             if ((mask & (1 << i)) != 0) {
                 list.add(a[i]);
