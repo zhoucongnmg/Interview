@@ -18,13 +18,15 @@ public class DividWithoutDivid {
     }
 
     public int divide(int dividend, int divisor) throws Exception {
-        if (divisor == 0)
+        if (divisor == 0) {
             throw new Exception();
+        }
         int sign = 0;
-        if (dividend > 0 && divisor > 0 || dividend < 0 && divisor < 0)
+        if (dividend > 0 && divisor > 0 || dividend < 0 && divisor < 0) {
             sign = 1;
-        else
+        } else {
             sign = -1;
+        }
 
         //此处要注意 Math。abs里面一定要加long
         long div1 = Math.abs((long) dividend);
@@ -42,11 +44,13 @@ public class DividWithoutDivid {
             cur = 1;
             temp = div2;
         }
-        if (sign == -1)
+        if (sign == -1) {
             //符号取反，正号变符号，符号变正号
             result = ~result + 1;
-        else if (result > Integer.MAX_VALUE)
+        } else if (result > Integer.MAX_VALUE) {
             result = Integer.MAX_VALUE;
+        }
         return (int) result;
     }
+
 }
