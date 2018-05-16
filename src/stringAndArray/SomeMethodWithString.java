@@ -72,14 +72,14 @@ public class SomeMethodWithString {
             char c = s.charAt(i);
             if (!map.containsKey(c)) {
                 curLen++;
-                if (curLen > maxLen) {
-                    maxLen = curLen;
-                    maxStart = curStart;
-                }
             } else {
                 //下面两行代码是重点好吧 abbefa    abcada
                 curStart = Math.max(map.get(c) + 1, curStart);
                 curLen = i - curStart + 1;
+            }
+            if (curLen > maxLen) {
+                maxLen = curLen;
+                maxStart = curStart;
             }
             map.put(c, i);
         }
