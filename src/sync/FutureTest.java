@@ -12,6 +12,7 @@ public class FutureTest {
 
     public static void main(String[] args) throws InterruptedException {
         Thread thread = new Thread(() -> {
+            long start = System.currentTimeMillis();
             while (true) {
                 Future<Integer> future = null;
                 try {
@@ -33,6 +34,7 @@ public class FutureTest {
                 }
                 if (result == null) {
                     System.out.println("½áÊø");
+                    System.out.println(System.currentTimeMillis() - start);
                 }
             }
         });
@@ -42,7 +44,7 @@ public class FutureTest {
             int finalI = i;
             int finalI1 = i;
             resultQueue.put(threadPoolExecutor.submit(() -> {
-                Thread.sleep((10- finalI1)*1000);
+                Thread.sleep((10 - finalI1) * 1000);
                 return finalI;
             }));
         }

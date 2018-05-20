@@ -161,7 +161,7 @@ public class TreeOrder {
         if (root == null) {
             return;
         }
-        ArrayList<TreeNode> list = null;
+        ArrayList<TreeNode> list;
         if (lists.size() == level) {
             list = new ArrayList<>();
             lists.add(list);

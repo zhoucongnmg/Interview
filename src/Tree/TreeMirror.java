@@ -32,6 +32,7 @@ public class TreeMirror {
      * @param root
      * @return
      */
+
     public boolean isMirror(TreeNode root) {
         if (root == null) {
             return true;

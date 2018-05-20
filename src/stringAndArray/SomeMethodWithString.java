@@ -22,7 +22,7 @@ public class SomeMethodWithString {
         System.out.println(sm.maxSum(a));
         System.out.println(sm.maxSum(b));
 
-        System.out.println(sm.longestSameSubString("vvenk", "jvvenk"));
+        System.out.println(sm.longestSameSubString("vvenk", "jvvenksssssss"));
         System.out.println(sm.longestSameSubXulie("abcdef", "zbhdf"));
         System.out.println(sm.zuiChangHuiWen("babcbabcbaccba"));
 
@@ -92,7 +92,7 @@ public class SomeMethodWithString {
      * (2)插入一个字符；
      * (3)将一个字符改为另一个字符。
      * dp[i][j]它表示第一个字符串的长度为i的子串到第二个字符串的长度为j的子串的最短编辑距离。
-     * 插入删除都是针对s2
+     * 插入删除都是针对s1
      */
     public int shortEditLen(String s1, String s2) {
         if (s1 == null || s2 == null) {
@@ -109,8 +109,8 @@ public class SomeMethodWithString {
         }
         for (int i = 1; i <= len1; i++) {
             for (int j = 1; j <= len2; j++) {
-                delete = dp[i][j - 1] + 1;
-                insert = dp[i - 1][j] + 1;
+                delete = dp[i - 1][j] + 1;
+                insert = dp[i][j - 1] + 1;
                 //此处需注意，为s1.charAt(i-1)
                 update = s1.charAt(i - 1) == s2.charAt(j - 1) ? dp[i - 1][j - 1] : dp[i - 1][j - 1] + 1;
                 dp[i][j] = Math.min(update, Math.min(delete, insert));
@@ -159,28 +159,24 @@ public class SomeMethodWithString {
         }
 
         int len1 = s1.length(), len2 = s2.length();
-        int[] dp = new int[len2];
-        int[] temp = new int[len2];
+        int[] dp0 = new int[len2 + 1];
+        int[] dp1 = new int[len2 + 1];
         int maxEnd = 0, maxLen = 0;
 
-        for (int i = 0; i < len1; i++) {
-            for (int j = 0; j < len2; j++) {
-                if (s1.charAt(i) == s2.charAt(j)) {
-                    if (j == 0) {
-                        temp[j] = 1;
-                    } else {
-                        temp[j] = dp[j - 1] + 1;
-                    }
-                    if (temp[j] > maxLen) {
-                        maxLen = temp[j];
-                        maxEnd = j;
+        for (int i = 1; i <= len1; i++) {
+            for (int j = 1; j <= len2; j++) {
+                if (s1.charAt(i - 1) == s2.charAt(j - 1)) {
+                    dp1[j] = dp0[j - 1] + 1;
+                    if (dp1[j] > maxLen) {
+                        maxLen = dp1[j];
+                        maxEnd = j - 1;
                     }
                 } else {
-                    temp[j] = 0;
+                    dp1[j] = Math.max(dp1[j - 1], dp0[j]);
                 }
             }
             //注意此处不能直接dp = temp ，这样他俩就指向同一地址，我们要的是两个数组值赋值
-            System.arraycopy(temp, 0, dp, 0, len1);
+            System.arraycopy(dp1, 0, dp0, 0, len2 + 1);
         }
         return s2.substring(maxEnd - maxLen + 1, maxEnd + 1);
     }
@@ -196,7 +192,7 @@ public class SomeMethodWithString {
             return "";
         }
         int len1 = s1.length(), len2 = s2.length();
-        //dp[i][j]表示s1[0-i]和s2[0-j]两个子串的最长公共子序列，所以逐步求到dp[i][j]即为所求
+        //dp[i][j]表示s1的前i位和s2的前j位两个子串的最长公共子序列，所以逐步求到dp[i][j]即为所求
         int[][] dp = new int[len1 + 1][len2 + 1];
 
         for (int i = 0; i <= len1; i++) {
@@ -221,30 +217,46 @@ public class SomeMethodWithString {
         //输出最长子序列,此处注意 i为1而不是0
         int i = 1, j = 1;
         StringBuilder sb = new StringBuilder();
-        while (sb.length() < maxLen) {
-            //此处注意i-1而不是i
-            if (s1.charAt(i - 1) == s2.charAt(j - 1)) {
-                sb.append(s1.charAt(i - 1));
-                i++;
-                j++;
-            } else {
-                //此处注意边界校验
-                if (i + 1 > len1) {
+//        while (sb.length() < maxLen) {
+//            //此处注意i-1而不是i
+//            if (s1.charAt(i - 1) == s2.charAt(j - 1)) {
+//                sb.append(s1.charAt(i - 1));
+//                i++;
+//                j++;
+//            } else {
+//                //此处注意边界校验
+//                if (i + 1 > len1) {
+//                    j++;
+//                    continue;
+//                }
+//                if (j + 1 > len2) {
+//                    i++;
+//                    continue;
+//                }
+//                if (dp[i + 1][j] > dp[i][j + 1]) {
+//                    i++;
+//                } else {
+//                    j++;
+//                }
+//            }
+//        }
+        while (i <= len1) {
+            while (j <= len2) {
+                if (dp[i][j] == sb.length() + 1) {
+                    sb.append(s2.charAt(j - 1));
+                    i++;
                     j++;
-                    continue;
-                }
-                if (j + 1 > len2) {
-                    i++;
-                    continue;
-                }
-                if (dp[i + 1][j] > dp[i][j + 1]) {
-                    i++;
                 } else {
                     j++;
                 }
+                if (sb.length() == maxLen) {
+                    return sb.toString();
+                }
             }
+            i++;
+            j = 1;
         }
-        return sb.toString();
+        return null;
     }
 
     /**
@@ -285,7 +297,7 @@ public class SomeMethodWithString {
         }
         int[] temp = new int[a.length];
         int[] dp = new int[a.length];  //dp[i]表示以a[i]为结尾的最长递增子序列长度
-        int len = 0;
+        int len = 0; //表示temp中元素个数
         for (int i = 0; i < a.length; i++) {
             int j = binarySearch(temp, 0, len - 1, a[i]);
             temp[j] = a[i];
@@ -299,9 +311,6 @@ public class SomeMethodWithString {
     }
 
     public int binarySearch(int[] a, int start, int end, int k) {
-        if (a == null) {
-            return -1;
-        }
         if (start > end) {
             return start;
         }
