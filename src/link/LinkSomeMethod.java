@@ -96,7 +96,7 @@ public class LinkSomeMethod {
         if (head1 == null || head2 == null) {
             return null;
         }
-        // 获取环的入口点
+        // 获取环的入口点  此处注意
         LinkNode node1 = findHuanIn(head1);
         LinkNode node2 = findHuanIn(head2);
         // 两个都无环
@@ -141,6 +141,7 @@ public class LinkSomeMethod {
         int len1 = getLen(head1, node);
         int len2 = getLen(head2, node);
         int k = Math.abs(len1 - len2);
+        //此处注意变量名
         LinkNode longLink = len1 > len2 ? head1 : head2;
         LinkNode shortLink = len1 > len2 ? head2 : head1;
         while (k > 0) {
@@ -246,7 +247,7 @@ public class LinkSomeMethod {
     }
 
     /**
-     * 单链表排序，要求时间复杂度OnLogn，空间复杂度O1
+     * 单链表排序，要求时间复杂度OnLogn，空间复杂度O1，注意，多次没写上
      *
      * @param head
      */
@@ -270,6 +271,7 @@ public class LinkSomeMethod {
 
     /**
      * 删除链表中的节点
+     * 注意：1->2->6->3->4->5->6
      *
      * @param head
      */

@@ -65,7 +65,7 @@ public class ReverseLink {
     }
 
     /**
-     * 给了一个链表，第1个结点标号为1，把链表中标号在M到N区间的部分反转
+     * 给了一个链表，第1个结点标号为1，把链表中标号在n到m区间的部分反转 多次不会
      */
     public LinkNode reverseFromNToM(LinkNode head, int n, int m) {
         if (head == null || head.next == null) {
@@ -83,11 +83,11 @@ public class ReverseLink {
             l = l.next;
             n--;
         }
-        if (n > 1) {
+        if (n > 1 || l == null) {
             return head;
         }
         LinkNode pre = l.next;
-        if(pre == null){
+        if (pre == null) {
             return head;
         }
         LinkNode cur = pre.next, temp = null;

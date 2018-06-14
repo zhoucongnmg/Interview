@@ -92,7 +92,6 @@ public class SomeMethodWithString {
      * (2)插入一个字符；
      * (3)将一个字符改为另一个字符。
      * dp[i][j]它表示第一个字符串的长度为i的子串到第二个字符串的长度为j的子串的最短编辑距离。
-     * 插入删除都是针对s1
      */
     public int shortEditLen(String s1, String s2) {
         if (s1 == null || s2 == null) {

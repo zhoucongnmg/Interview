@@ -41,4 +41,25 @@ public class SomeRandomMethod {
         }
         return result;
     }
+
+    /**
+     * 随机洗牌问题
+     * 将数组a随机洗牌
+     */
+    public void suiJiXiPai(int[] a) {
+        if (a == null) {
+            return;
+        }
+        int ran;
+        for (int i = a.length - 1; i >= 0; i--) {
+            ran = (int) (Math.random() * (i + 1));
+            swap(a, ran, i);
+        }
+    }
+
+    public void swap(int[] a, int i, int j) {
+        int temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
+    }
 }

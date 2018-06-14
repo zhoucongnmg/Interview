@@ -26,8 +26,7 @@ public class FindTwoLarge {
                     max2Has = true;
                 }
                 max1 = i;
-            }
-            if (max2 < i && i < max1) {
+            } else if (max2 < i && i < max1) {
                 max2 = i;
                 max2Has = true;
             }

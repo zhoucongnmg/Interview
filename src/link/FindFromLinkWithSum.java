@@ -24,8 +24,9 @@ public class FindFromLinkWithSum {
     }
 
     public void find(LinkNode head, int sum) {
-        if (head == null)
+        if (head == null) {
             return;
+        }
         LinkNode start = head, temp = start;
         int count = 0;
         while (start != null) {

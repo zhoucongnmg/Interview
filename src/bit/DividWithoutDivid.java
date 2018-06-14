@@ -3,6 +3,8 @@ package bit;
 /**
  * 不用乘除号实现除法
  *
+ * 运算时注意符号，注意整数边界（整数相加、相乘、取绝对值）
+ *
  * @author zc
  */
 public class DividWithoutDivid {

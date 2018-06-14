@@ -4,6 +4,7 @@ import Tree.TreeNode;
 
 /**
  * 给定任意双向链表，按从小到大顺序输出。要求时间复杂度O(nlogn)，空间复杂度O(1)
+ * 多次不会
  * 
  * @author zc
  *
@@ -91,7 +92,7 @@ public class PrintDoubleLinked {
 			while (p.right != null) {
 				p = p.right;
 			}
-			p.right = root;
+			p.right = root;		//注意双向链表
 			root.left = p;
 		}
 		// 将右子树转换为双向链表并返回头节点
