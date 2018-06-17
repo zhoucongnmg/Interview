@@ -3,6 +3,7 @@ package other;
 /**
  * 约瑟夫环问题
  *
+ * 注意
  * @author zc
  */
 public class YueSeFuHuan {

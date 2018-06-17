@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+
 public class QuanPaiLie {
     public static void main(String[] args) {
         QuanPaiLie qpl = new QuanPaiLie();
@@ -13,6 +14,7 @@ public class QuanPaiLie {
     }
 
     //字符串全排列
+    //递归时注意 递归出口
     public void quanPaiLie(char[] a, int start, int end) {
 
         if (start == end) {
@@ -43,6 +45,7 @@ public class QuanPaiLie {
     }
 
     //集合非空子集 非递归
+    //注意
     public List<List<Integer>> getSubsets(int[] a) {
         List<List<Integer>> re = new ArrayList<>();
         if (a == null || a.length == 0) {
@@ -59,8 +62,9 @@ public class QuanPaiLie {
 
     public List<Integer> find(int[] a, int mask) {
         List<Integer> list = new ArrayList<>();
-        for (int i = a.length - 1; i >= 0; i--) {
-            if ((mask & (1 << i)) != 0) {
+        for (int i = 0; i < a.length; i++) {
+            int shift = a.length - i - 1;
+            if ((mask & (1 << shift)) != 0) {
                 list.add(a[i]);
             }
         }

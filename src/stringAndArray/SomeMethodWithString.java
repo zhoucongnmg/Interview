@@ -14,15 +14,15 @@ public class SomeMethodWithString {
     public static void main(String[] args) {
         SomeMethodWithString sm = new SomeMethodWithString();
         String s = "abcdaaabbcdaeeee";
-        System.out.println(sm.longDupSub(s));
-        System.out.println(sm.longNotDupSub(s));
-        System.out.println(sm.shortEditLen("sailn", "failing"));
-        int[] a = {-2, 11, -4, 13, -5, 2};
-        int[] b = {1, -3, 4, -2, -1, 6};
-        System.out.println(sm.maxSum(a));
-        System.out.println(sm.maxSum(b));
+//        System.out.println(sm.longDupSub(s));
+//        System.out.println(sm.longNotDupSub(s));
+//        System.out.println(sm.shortEditLen("sailn", "failing"));
+//        int[] a = {-2, 11, -4, 13, -5, 2};
+//        int[] b = {1, -3, 4, -2, -1, 6};
+//        System.out.println(sm.maxSum(a));
+//        System.out.println(sm.maxSum(b));
 
-        System.out.println(sm.longestSameSubString("vvenk", "jvvenksssssss"));
+//        System.out.println(sm.longestSameSubString("vvsenk", "jvvenksssssss"));
         System.out.println(sm.longestSameSubXulie("abcdef", "zbhdf"));
         System.out.println(sm.zuiChangHuiWen("babcbabcbaccba"));
 
@@ -40,19 +40,18 @@ public class SomeMethodWithString {
         if (s == null || s.length() == 0) {
             return s;
         }
-        int maxStart = 0, maxLen = 0;
+        int maxStart = 0, maxLen = 1;
         int curStart = 0, curLen = 1;
         for (int i = 1; i < s.length(); i++) {
             if (s.charAt(i) == s.charAt(i - 1)) {
                 curLen++;
-                //下面代码放在此处可以避免数组最后一位时的校验
-                if (curLen > maxLen) {
-                    maxLen = curLen;
-                    maxStart = curStart;
-                }
             } else {
                 curLen = 1;
                 curStart = i;
+            }
+            if (curLen > maxLen) {
+                maxLen = curLen;
+                maxStart = curStart;
             }
         }
         return s.substring(maxStart, maxStart + maxLen);
@@ -60,12 +59,14 @@ public class SomeMethodWithString {
 
     /**
      * 最长不重复子串
+     * <p>
+     * 注意
      */
     public String longNotDupSub(String s) {
         if (s == null || s.length() == 0) {
             return s;
         }
-        int maxStart = 0, maxLen = 0;
+        int maxStart = 0, maxLen = 1;
         int curStart = 0, curLen = 0;
         Map<Character, Integer> map = new HashMap<>(s.length());
         for (int i = 0; i < s.length(); i++) {
@@ -94,8 +95,14 @@ public class SomeMethodWithString {
      * dp[i][j]它表示第一个字符串的长度为i的子串到第二个字符串的长度为j的子串的最短编辑距离。
      */
     public int shortEditLen(String s1, String s2) {
-        if (s1 == null || s2 == null) {
+        if (s1 == null && s2 == null) {
             return -1;
+        }
+        if (s1 == null) {
+            return s2.length();
+        }
+        if (s2 == null) {
+            return s1.length();
         }
         int len1 = s1.length(), len2 = s2.length();
         int[][] dp = new int[len1 + 1][len2 + 1];
@@ -166,12 +173,12 @@ public class SomeMethodWithString {
             for (int j = 1; j <= len2; j++) {
                 if (s1.charAt(i - 1) == s2.charAt(j - 1)) {
                     dp1[j] = dp0[j - 1] + 1;
-                    if (dp1[j] > maxLen) {
-                        maxLen = dp1[j];
-                        maxEnd = j - 1;
-                    }
                 } else {
-                    dp1[j] = Math.max(dp1[j - 1], dp0[j]);
+                    dp1[j] = 0;
+                }
+                if (dp1[j] > maxLen) {
+                    maxLen = dp1[j];
+                    maxEnd = j - 1;
                 }
             }
             //注意此处不能直接dp = temp ，这样他俩就指向同一地址，我们要的是两个数组值赋值
@@ -194,6 +201,9 @@ public class SomeMethodWithString {
         //dp[i][j]表示s1的前i位和s2的前j位两个子串的最长公共子序列，所以逐步求到dp[i][j]即为所求
         int[][] dp = new int[len1 + 1][len2 + 1];
 
+        StringBuilder sb = new StringBuilder();
+        int maxCount = 0;
+
         for (int i = 0; i <= len1; i++) {
             dp[i][0] = 0;
         }
@@ -208,54 +218,13 @@ public class SomeMethodWithString {
                 } else {
                     dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
                 }
-            }
-        }
-
-        int maxLen = dp[len1][len2];
-
-        //输出最长子序列,此处注意 i为1而不是0
-        int i = 1, j = 1;
-        StringBuilder sb = new StringBuilder();
-//        while (sb.length() < maxLen) {
-//            //此处注意i-1而不是i
-//            if (s1.charAt(i - 1) == s2.charAt(j - 1)) {
-//                sb.append(s1.charAt(i - 1));
-//                i++;
-//                j++;
-//            } else {
-//                //此处注意边界校验
-//                if (i + 1 > len1) {
-//                    j++;
-//                    continue;
-//                }
-//                if (j + 1 > len2) {
-//                    i++;
-//                    continue;
-//                }
-//                if (dp[i + 1][j] > dp[i][j + 1]) {
-//                    i++;
-//                } else {
-//                    j++;
-//                }
-//            }
-//        }
-        while (i <= len1) {
-            while (j <= len2) {
-                if (dp[i][j] == sb.length() + 1) {
-                    sb.append(s2.charAt(j - 1));
-                    i++;
-                    j++;
-                } else {
-                    j++;
-                }
-                if (sb.length() == maxLen) {
-                    return sb.toString();
+                if(dp[i][j] > maxCount){
+                    maxCount = dp[i][j];
+                    sb.append(s1.charAt(i-1));
                 }
             }
-            i++;
-            j = 1;
         }
-        return null;
+        return sb.toString();
     }
 
     /**
@@ -288,6 +257,7 @@ public class SomeMethodWithString {
 
     /**
      * 最长递增子序列
+     * 注意
      */
 
     public int[] longestIncreaseSub(int[] a) {
@@ -314,7 +284,7 @@ public class SomeMethodWithString {
             return start;
         }
         int mid = (start + end) / 2;
-        if (a[mid] == k) {
+        if (a[mid] == k) {  //此处注意，根据数组中相同值得不同处理 有不同的方案，具体问面试官
             return mid;
         } else if (a[mid] > k) {
             return binarySearch(a, start, mid - 1, k);
@@ -325,12 +295,12 @@ public class SomeMethodWithString {
 
     public int[] getResult(int[] a, int[] dp, int len) {
         int[] result = new int[len];
-        int value = Integer.MAX_VALUE;
+        int before = Integer.MAX_VALUE;
         int index = len - 1;
         for (int i = dp.length - 1; i >= 0; i--) {
-            if (dp[i] == index + 1 && a[i] < value) {
+            if (dp[i] == index + 1 && a[i] < before) {
                 result[index--] = a[i];
-                value = a[i];
+                before = a[i];
             }
             if (index < 0) {
                 break;

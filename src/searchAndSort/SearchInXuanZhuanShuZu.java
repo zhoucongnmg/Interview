@@ -3,6 +3,8 @@ package searchAndSort;
 /**
  * 在旋转数组中查找
  *
+ * 注意
+ *
  * @author zc
  */
 public class SearchInXuanZhuanShuZu {

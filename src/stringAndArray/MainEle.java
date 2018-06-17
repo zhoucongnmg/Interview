@@ -10,6 +10,8 @@ public class MainEle {
 
     /**
      * 数组中找出出现次数大于数组元素一半的元素
+     *
+     * 注意
      */
     public int majorityElement(int[] a) {
         if (a == null || a.length == 0) {

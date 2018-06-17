@@ -13,13 +13,14 @@ public class SortMethod {
         SortMethod sm = new SortMethod();
         Integer[] a = {5, 4, 3, 2, 1, 1};
         String[] s = {"d", "c", "b", "a"};
+        Integer[] a1 = {1};
 //		sm.maopaoSort(a);
-        sm.mergeSort(s, 0, s.length - 1);
-		 sm.quickSort(a,0,a.length-1);
-		sm.quickSort(a);
+//        sm.mergeSort(s, 0, s.length - 1);
+        sm.quickSort(a1, 0, a1.length - 1);
+//        sm.quickSort(a);
 //        sm.heapSort(a);
-        sm.printArray(a);
-        sm.printArray(s);
+//        sm.printArray(a);
+        sm.printArray(a1);
     }
 
     /**
@@ -89,7 +90,7 @@ public class SortMethod {
      * 递归快排
      */
     public <T extends Comparable<T>> void quickSort(T[] a, int start, int end) {
-        if (a == null || start >= end) {
+        if (a == null || start >= end) {  //注意此处的判断
             return;
         }
         if (end - start <= 2) {

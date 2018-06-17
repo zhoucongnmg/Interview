@@ -3,6 +3,8 @@ package other;
 /**
  * 最大公约数
  *
+ * 除法时注意被除数不能为0
+ *
  * @author zc
  */
 public class ZuiDaGongYueShu {

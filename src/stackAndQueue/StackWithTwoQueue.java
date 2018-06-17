@@ -5,6 +5,7 @@ import java.util.Queue;
 
 /**
  * 用两个队列实现栈
+ * 注意
  *
  * @author zc
  */

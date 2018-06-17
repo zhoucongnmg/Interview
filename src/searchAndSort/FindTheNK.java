@@ -77,10 +77,7 @@ public class FindTheNK {
             return -1;
         }
         if (start > end) {
-            if (end < 0) {
-                return -1;
-            }
-            if (a[end] == k) {
+            if (end != -1 && a[end] == k) {
                 return end;
             } else {
                 return -1;
@@ -94,5 +91,4 @@ public class FindTheNK {
         }
 
     }
-
 }

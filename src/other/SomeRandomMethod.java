@@ -19,6 +19,8 @@ public class SomeRandomMethod {
      * 蓄水池抽样问题
      * 现在有100个数，我要选10个数出来，每个数选出来的概率要是均等。
      * 在数组a中随机抽取n个数，要求每个数被抽到的概率相同
+     *
+     * 注意随机数转int
      */
     public int[] xuShuiChiChouYang(int[] a, int n) {
         if (a == null) {

@@ -3,6 +3,8 @@ package other;
 /**
  * 计算0-n中数字k出现的次数
  *
+ * 注意，多次没写上
+ *
  * @author zc
  */
 public class KSumFrom0ToN {

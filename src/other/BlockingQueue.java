@@ -22,6 +22,7 @@ public class BlockingQueue<T> {
         notFull = lock.newCondition();
     }
 
+    //注意interrupt异常，await必须在lock内，await和singal配对
     public void put(T value) throws InterruptedException {
         lock.lockInterruptibly();
         try {

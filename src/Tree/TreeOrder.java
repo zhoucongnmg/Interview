@@ -56,24 +56,19 @@ public class TreeOrder {
         s.push(root);
         TreeNode temp = null;
         while (!s.isEmpty()) {
-            temp = s.pop();
+            temp = s.peek();
             temp.popTimes++;
-            if (temp.popTimes == 3) {
-                System.out.print(temp.val + " ");
-                continue;
-            }
-            s.push(temp);
             if (temp.popTimes == 1) {
                 if (temp.left != null) {
                     s.push(temp.left);
                 }
-                continue;
-            }
-            if (temp.popTimes == 2) {
+            } else if (temp.popTimes == 2) {
                 if (temp.right != null) {
                     s.push(temp.right);
                 }
-                continue;
+            } else {
+                s.pop();
+                System.out.print(temp.val + " ");
             }
         }
         System.out.println();
@@ -90,17 +85,14 @@ public class TreeOrder {
         Stack<TreeNode> s = new Stack<>();
         s.push(root);
         while (!s.isEmpty()) {
-            temp = s.pop();
+            temp = s.peek();
             temp.popTimes++;
             if (temp.popTimes == 2) {
                 System.out.print(temp.val + " ");
                 if (temp.right != null) {
                     s.push(temp.right);
                 }
-                continue;
-            }
-            s.push(temp);
-            if (temp.popTimes == 1) {
+            } else if (temp.popTimes == 1) {
                 if (temp.left != null) {
                     s.push(temp.left);
                 }
@@ -157,6 +149,7 @@ public class TreeOrder {
 
     // 层次遍历递归
     // 用这个方法
+    // 注意
     public void levelOrder3(TreeNode root, ArrayList<ArrayList<TreeNode>> lists, int level) {
         if (root == null) {
             return;

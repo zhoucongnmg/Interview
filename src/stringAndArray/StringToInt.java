@@ -16,14 +16,13 @@ public class StringToInt {
 
     /**
      * String转为int
+     *
      */
     public Integer stringToInt(String s) {
         if (s == null || s.length() == 0) {
             return null;
         }
 
-        //去空格
-        s = s.trim();
         //注意涉及字符串转int的都要先用long暂存，最后在返回前判断是否越界
         long sum = 0;
         int start = 0;
@@ -53,6 +52,7 @@ public class StringToInt {
 
     /**
      * 两个字符串相加（字符串代表的数字无限大会溢出）
+     * 注意
      */
     public String addTwoString(String a, String b) {
         if (a == null || a.length() == 0) {

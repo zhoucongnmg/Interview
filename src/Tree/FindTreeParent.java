@@ -73,8 +73,11 @@ public class FindTreeParent {
         List<TreeNode> list1 = new ArrayList<>();
         List<TreeNode> list2 = new ArrayList<>();
         // 节点不存在
-        if (!findPath(root, node1, list1) || !findPath(root, node2, list2)) {
-            return null;
+        if (!findPath(root, node1, list1)){
+            return node2;
+        }
+        if(!findPath(root, node2, list2)) {
+            return node1;
         }
         // 此处注意
         int len = list1.size() > list2.size() ? list2.size() : list1.size();

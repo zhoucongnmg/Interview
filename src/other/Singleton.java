@@ -2,6 +2,7 @@ package other;
 
 /**
  * 单例模式
+ * 注意
  * @author zc
  *
  */
