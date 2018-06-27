@@ -32,10 +32,10 @@ public class IsSubTree {
 
     //子树，必须到达叶节点
     public boolean HasSubtree2(TreeNode root1, TreeNode root2) {
-        if (root2 == null && root1 == null) {
+        if (root2 == null) {
             return true;
         }
-        if (root1 == null || root2 == null) {
+        if (root1 == null) {
             return false;
         }
         if (root1.val == root2.val && isSame2(root1, root2)) {
