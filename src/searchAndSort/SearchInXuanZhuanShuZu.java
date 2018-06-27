@@ -2,7 +2,7 @@ package searchAndSort;
 
 /**
  * 在旋转数组中查找
- *
+ * <p>
  * 注意
  *
  * @author zc
@@ -16,7 +16,9 @@ public class SearchInXuanZhuanShuZu {
         int[] d = {1, 2, 1, 1, 1};
         int[] f = {2, 2, 3, 1};
         int[] e = {5, 6, 6, 7, 8, 1, 2, 3, 4};
+        int[] g = {5,4,3,6};
         SearchInXuanZhuanShuZu s = new SearchInXuanZhuanShuZu();
+        System.out.println(s.findPartMin(g));
         System.out.println(s.findMax(a, 0, a.length - 1));
         System.out.println(s.findMax(b, 0, b.length - 1));
         System.out.println(s.findMax(c, 0, c.length - 1));
@@ -128,5 +130,39 @@ public class SearchInXuanZhuanShuZu {
             i = bs.search(a, minIndex, a.length - 1, k);
         }
         return i;
+    }
+
+    /**
+     * 局部最小，一个先降后升的数组中找到最小值下标
+     */
+    public int findPartMin(int[] a) {
+        if (a == null || a.length == 0) {
+            return -1;
+        }
+        if (a.length == 1) {
+            return 0;
+        }
+        return findPartMin(a, 0, a.length - 1);
+    }
+
+    public int findPartMin(int[] a, int start, int end) {
+        if (start == end) {
+            return start;
+        }
+        if (a[start] < a[start + 1]) {
+            return start;
+        }
+        if (a[end] < a[end - 1]) {
+            return end;
+        }
+        int mid = start + (end - start) / 2;
+        if (a[mid] > a[mid - 1] && a[mid] < a[mid + 1]) {
+            return mid;
+        }
+        if (a[mid] < a[mid - 1]) {
+            return findPartMin(a, mid + 1, end);
+        } else {
+            return findPartMin(a, start, mid - 1);
+        }
     }
 }

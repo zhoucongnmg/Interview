@@ -173,7 +173,7 @@ public class SomeMethodWithString {
             for (int j = 1; j <= len2; j++) {
                 if (s1.charAt(i - 1) == s2.charAt(j - 1)) {
                     dp1[j] = dp0[j - 1] + 1;
-                } else {
+                } else {   //此处注意，是0，而不是max(dp1[j-1],dp0[j])
                     dp1[j] = 0;
                 }
                 if (dp1[j] > maxLen) {
@@ -218,9 +218,9 @@ public class SomeMethodWithString {
                 } else {
                     dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
                 }
-                if(dp[i][j] > maxCount){
+                if (dp[i][j] > maxCount) {
                     maxCount = dp[i][j];
-                    sb.append(s1.charAt(i-1));
+                    sb.append(s1.charAt(i - 1));
                 }
             }
         }
@@ -253,6 +253,32 @@ public class SomeMethodWithString {
             j++;
         }
         return s.substring(i + 1, j);
+    }
+
+
+    /**
+     * 最长递增连续子序列长度
+     */
+    public int findLengthOfLCIS(int[] a) {
+        if (a == null || a.length == 0) {
+            return 0;
+        }
+        if (a.length == 1) {
+            return 1;
+        }
+        int max = 1, start = 0, cur = 1;
+        for (int i = 1; i < a.length; i++) {
+            if (a[i] > a[i - 1]) {
+                cur = i - start + 1;
+            } else {
+                start = i;
+                cur = 1;
+            }
+            if (cur > max) {
+                max = cur;
+            }
+        }
+        return max;
     }
 
     /**

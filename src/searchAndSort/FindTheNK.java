@@ -51,10 +51,7 @@ public class FindTheNK {
         }
         if (start > end) {
             //注意此处校验
-            if (start >= a.length) {
-                return -1;
-            }
-            if (a[start] == k) {
+            if (start <= a.length && a[start] == k) {
                 return start;
             } else {
                 return -1;

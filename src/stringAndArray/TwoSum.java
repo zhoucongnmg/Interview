@@ -4,7 +4,10 @@ import java.util.*;
 
 public class TwoSum {
     public static void main(String[] args) {
-
+        TwoSum twoSum = new TwoSum();
+        int[] a = {1, 2, 3, 4, 5};
+        List<List<Integer>> list = twoSum.kSum(a, 4, 10);
+        System.out.println();
     }
 
     //两个数的和为指定值 有序
@@ -81,63 +84,50 @@ public class TwoSum {
         return returnList;
     }
 
-    //四个数和，从而引申到k个数和，叹为观止，不用看
-    int len = 0;
+    //四个数和，从而引申到k个数和，叹为观止，除头条外不用看
 
-    public List<List<Integer>> fourSum(int[] nums, int target) {
-        len = nums.length;
-        Arrays.sort(nums);
-        return kSum(nums, target, 4, 0);
+    public List<List<Integer>> kSum(int[] a, int k, int sum) {
+        Arrays.sort(a);
+        if (a == null || a.length < k) {
+            return null;
+        }
+        List<List<Integer>> result = new ArrayList<>();
+        kSum(a, k, 0, a.length - 1, sum, new ArrayList<>(), result);
+        return result;
     }
 
-    private ArrayList<List<Integer>> kSum(int[] nums, int target, int k, int index) {
-        ArrayList<List<Integer>> res = new ArrayList<List<Integer>>();
-        if (index >= len) {
-            return res;
+    private void kSum(int[] a, int k, int start, int end, int sum, List<Integer> cur, List<List<Integer>> result) {
+        if (end - start + 1 < k) {
+            return;
         }
         if (k == 2) {
-            int i = index, j = len - 1;
+            int i = start, j = end;
             while (i < j) {
-                //find a pair
-                if (target - nums[i] == nums[j]) {
-                    List<Integer> temp = new ArrayList<>();
-                    temp.add(nums[i]);
-                    temp.add(target - nums[i]);
-                    res.add(temp);
-                    //skip duplication
-                    while (i < j && nums[i] == nums[i + 1]) {
-                        i++;
-                    }
-                    while (i < j && nums[j - 1] == nums[j]) {
-                        j--;
-                    }
+                if (a[i] + a[j] == sum) {
+                    cur.add(a[i]);
+                    cur.add(a[j]);
+                    List<Integer> sub = new ArrayList<>(cur);
+                    result.add(sub);
                     i++;
                     j--;
-                    //move left bound
-                } else if (target - nums[i] > nums[j]) {
+                    while (i < j && a[i] == a[i - 1]) {
+                        i++;
+                    }
+                    while (i < j && a[j] == a[j + 1]) {
+                        j--;
+                    }
+                } else if (a[i] + a[j] < sum) {
                     i++;
-                    //move right bound
                 } else {
                     j--;
                 }
             }
         } else {
-            for (int i = index; i < len - k + 1; i++) {
-                //use current number to reduce ksum into k-1sum
-                ArrayList<List<Integer>> temp = kSum(nums, target - nums[i], k - 1, i + 1);
-                if (temp != null) {
-                    //add previous results
-                    for (List<Integer> t : temp) {
-                        t.add(0, nums[i]);
-                    }
-                    res.addAll(temp);
-                }
-                while (i < len - 1 && nums[i] == nums[i + 1]) {
-                    //skip duplicated numbers
-                    i++;
-                }
+            for (int i = start; i <= end - k + 1; i++) {
+                cur.add(a[i]);
+                kSum(a, k - 1, i + 1, end, sum - a[i], cur, result);
+                cur.remove(cur.size()-1);
             }
         }
-        return res;
     }
 }

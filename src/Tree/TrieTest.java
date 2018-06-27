@@ -43,6 +43,11 @@ class TrieNode {
         child.insert(s.substring(1));
     }
 
+    /**
+     * ×¢ÒâµÝ¹é³ö¿Ú
+     * @param s
+     * @return
+     */
     public boolean search(String s) {
         if (s == null || s.length() == 0) {
             return true;

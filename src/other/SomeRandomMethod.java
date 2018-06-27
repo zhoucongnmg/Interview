@@ -9,17 +9,20 @@ public class SomeRandomMethod {
 
     public static void main(String[] args) {
 
-        double x = 3.0;
-        int y = 5;
-        x /= --y;
-        System.out.println(x);
+//        double x = 3.0;
+//        int y = 5;
+//        x /= --y;
+//        System.out.println(x);
+        for (int i = 0; i < 50; i++) {
+            System.out.println(random7WithRandom3());
+        }
     }
 
     /**
      * 蓄水池抽样问题
      * 现在有100个数，我要选10个数出来，每个数选出来的概率要是均等。
      * 在数组a中随机抽取n个数，要求每个数被抽到的概率相同
-     *
+     * <p>
      * 注意随机数转int
      */
     public int[] xuShuiChiChouYang(int[] a, int n) {
@@ -57,6 +60,28 @@ public class SomeRandomMethod {
             ran = (int) (Math.random() * (i + 1));
             swap(a, ran, i);
         }
+    }
+
+    /**
+     * 根据random3（从1到3的随机函数）计算random7（从1到7的随机函数）
+     *
+     * @return
+     */
+    public static int random7WithRandom3() {
+        int int0To8 = get0TO8();
+        while (int0To8 > 6) {
+            int0To8 = get0TO8();
+        }
+        return int0To8 + 1;
+    }
+
+    public static int get0TO8() {
+        return (random3() - 1) * 3 + random3() - 1;
+    }
+
+    public static int random3() {
+        int[] a = {1, 2, 3};
+        return a[(int) (Math.random() * 3)];
     }
 
     public void swap(int[] a, int i, int j) {

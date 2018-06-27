@@ -16,7 +16,9 @@ public class QuanPaiLie {
     //×Ö·û´®È«ÅÅÁĞ
     //µİ¹éÊ±×¢Òâ µİ¹é³ö¿Ú
     public void quanPaiLie(char[] a, int start, int end) {
-
+        if (start > end) {
+            return;
+        }
         if (start == end) {
             for (char c : a) {
                 System.out.print(c);
