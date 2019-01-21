@@ -2,6 +2,7 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/src/bit/DividWithoutDivid.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/link/LinkNodeInsert.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/other/FindTwoLarge.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/other/Recursion.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/other/ZouFangGe.java" charset="UTF-8" />

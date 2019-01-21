@@ -134,12 +134,12 @@ public class LinkSomeMethod {
     }
 
     // 两个无环链表第一个公共节点
-    public LinkNode findParent(LinkNode head1, LinkNode head2, LinkNode node) {
+    public LinkNode findParent(LinkNode head1, LinkNode head2, LinkNode end) {
         if (head1 == null || head2 == null) {
             return null;
         }
-        int len1 = getLen(head1, node);
-        int len2 = getLen(head2, node);
+        int len1 = getLen(head1, end);
+        int len2 = getLen(head2, end);
         int k = Math.abs(len1 - len2);
         //此处注意变量名
         LinkNode longLink = len1 > len2 ? head1 : head2;
@@ -149,7 +149,7 @@ public class LinkSomeMethod {
             k--;
         }
         //此处注意
-        while (longLink != node) {
+        while (longLink != end) {
             if (longLink == shortLink) {
                 return longLink;
             }
@@ -157,18 +157,18 @@ public class LinkSomeMethod {
             shortLink = shortLink.next;
         }
         //此处注意 不返回null
-        return node;
+        return end;
     }
 
     /**
      * 获取链表长度
      */
-    public int getLen(LinkNode head, LinkNode node) {
+    public int getLen(LinkNode head, LinkNode end) {
         if (head == null) {
             return 0;
         }
         int len = 0;
-        while (head != node) {
+        while (head != end) {
             head = head.next;
             len++;
         }
@@ -268,6 +268,31 @@ public class LinkSomeMethod {
 
         return mergeTwoLink(l1, l2);
     }
+
+    /**
+     * 单链表快排
+     */
+//    public LinkNode quickSort(LinkNode head) {
+//        if (head == null || head.next == null) {
+//            return head;
+//        }
+//        LinkNode pivot = head;
+//        LinkNode sHead = new LinkNode(0), s = sHead;
+//        LinkNode lHead = new LinkNode(0), l = lHead;
+//        LinkNode p = head.next;
+//        while (p != null) {
+//            LinkNode temp = p.next;
+//            p.next = null;
+//            if (p.val > pivot.val) {
+//                l.next = p;
+//                l = l.next;
+//            }else {
+//                s.next = p;
+//                s = s.next;
+//            }
+//            p = temp;
+//        }
+//    }
 
     /**
      * 删除链表中的节点

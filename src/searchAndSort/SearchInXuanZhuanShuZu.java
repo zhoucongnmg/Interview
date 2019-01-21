@@ -19,15 +19,15 @@ public class SearchInXuanZhuanShuZu {
         int[] g = {5,4,3,6};
         SearchInXuanZhuanShuZu s = new SearchInXuanZhuanShuZu();
         System.out.println(s.findPartMin(g));
-        System.out.println(s.findMax(a, 0, a.length - 1));
-        System.out.println(s.findMax(b, 0, b.length - 1));
-        System.out.println(s.findMax(c, 0, c.length - 1));
-        System.out.println(s.findMax(d, 0, d.length - 1));
-        System.out.println(s.findMax(f, 0, f.length - 1));
-        System.out.println(s.findK(e, 8));
-        System.out.println(s.findK(e, 6));
-        System.out.println(s.findK(e, 4));
-        System.out.println(s.findK(e, 10));
+//        System.out.println(s.findMax(a, 0, a.length - 1));
+//        System.out.println(s.findMax(b, 0, b.length - 1));
+//        System.out.println(s.findMax(c, 0, c.length - 1));
+//        System.out.println(s.findMax(d, 0, d.length - 1));
+//        System.out.println(s.findMax(f, 0, f.length - 1));
+//        System.out.println(s.findK(e, 8));
+//        System.out.println(s.findK(e, 6));
+//        System.out.println(s.findK(e, 4));
+//        System.out.println(s.findK(e, 10));
     }
 
     /**
@@ -156,7 +156,7 @@ public class SearchInXuanZhuanShuZu {
             return end;
         }
         int mid = start + (end - start) / 2;
-        if (a[mid] > a[mid - 1] && a[mid] < a[mid + 1]) {
+        if (a[mid] < a[mid - 1] && a[mid] < a[mid + 1]) {
             return mid;
         }
         if (a[mid] < a[mid - 1]) {
