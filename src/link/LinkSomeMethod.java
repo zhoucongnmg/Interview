@@ -30,12 +30,13 @@ public class LinkSomeMethod {
         System.out.println("倒数第3个节点的值为：" + ls.findLaskKNode(l1, 3).val);
         System.out.println("原链表为：");
         ls.printLink(l1);
-        LinkNode newHead = ls.sortList(l1);
+//        LinkNode newHead = ls.mergeSort(l1);
+        LinkNode newHead = ls.quickSort(l1);
         System.out.println("排序后为：");
         ls.printLink(newHead);
 
         LinkNode l10 = new LinkNode(1);
-        LinkNode l11 = new LinkNode(3);
+        LinkNode l11 = new LinkNode(1);
         LinkNode l12 = new LinkNode(5);
         LinkNode l13 = new LinkNode(2);
         LinkNode l14 = new LinkNode(4);
@@ -45,7 +46,7 @@ public class LinkSomeMethod {
         System.out.println("合并两个有序链表的结果为");
         ls.printLink(ls.mergeTwoLink(l10, l13));
         System.out.println("删除节点后");
-        ls.printLink(ls.deleteNode(l10, 3));
+        ls.printLink(ls.deleteNode(l10, 1));
     }
 
     /**
@@ -134,12 +135,12 @@ public class LinkSomeMethod {
     }
 
     // 两个无环链表第一个公共节点
-    public LinkNode findParent(LinkNode head1, LinkNode head2, LinkNode node) {
+    public LinkNode findParent(LinkNode head1, LinkNode head2, LinkNode end) {
         if (head1 == null || head2 == null) {
             return null;
         }
-        int len1 = getLen(head1, node);
-        int len2 = getLen(head2, node);
+        int len1 = getLen(head1, end);
+        int len2 = getLen(head2, end);
         int k = Math.abs(len1 - len2);
         //此处注意变量名
         LinkNode longLink = len1 > len2 ? head1 : head2;
@@ -149,7 +150,7 @@ public class LinkSomeMethod {
             k--;
         }
         //此处注意
-        while (longLink != node) {
+        while (longLink != end) {
             if (longLink == shortLink) {
                 return longLink;
             }
@@ -157,18 +158,18 @@ public class LinkSomeMethod {
             shortLink = shortLink.next;
         }
         //此处注意 不返回null
-        return node;
+        return end;
     }
 
     /**
      * 获取链表长度
      */
-    public int getLen(LinkNode head, LinkNode node) {
+    public int getLen(LinkNode head, LinkNode end) {
         if (head == null) {
             return 0;
         }
         int len = 0;
-        while (head != node) {
+        while (head != end) {
             head = head.next;
             len++;
         }
@@ -248,10 +249,11 @@ public class LinkSomeMethod {
 
     /**
      * 单链表排序，要求时间复杂度OnLogn，空间复杂度O1，注意，多次没写上
+     * 这个就是单链表归并排序
      *
      * @param head
      */
-    public LinkNode sortList(LinkNode head) {
+    public LinkNode mergeSort(LinkNode head) {
         if (head == null || head.next == null) {
             return head;
         }
@@ -263,10 +265,64 @@ public class LinkSomeMethod {
         }
         pre.next = null;
 
-        LinkNode l1 = sortList(head);
-        LinkNode l2 = sortList(slow);
+        LinkNode l1 = mergeSort(head);
+        LinkNode l2 = mergeSort(slow);
 
         return mergeTwoLink(l1, l2);
+    }
+
+    /**
+     * 单链表快排
+     */
+    public LinkNode quickSort(LinkNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        LinkNode pivot = head;
+        LinkNode leftHead = new LinkNode(0);
+        LinkNode leftTail = leftHead;
+        LinkNode rightHead = new LinkNode(0);
+        LinkNode rightTail = rightHead;
+        LinkNode cur = head.next;
+        while (cur != null) {
+            if (cur.val <= pivot.val) {
+                leftTail.next = cur;
+                leftTail = leftTail.next;
+            } else {
+                rightTail.next = cur;
+                rightTail = rightTail.next;
+            }
+            cur = cur.next;
+        }
+        leftTail.next = null;
+        LinkNode left = quickSort(leftHead.next);
+        LinkNode right = quickSort(rightHead.next);
+        LinkNode leftLast = findLast(left);
+        pivot.next = right;
+        if (leftLast == null) {
+            return pivot;
+        }
+        leftLast.next = pivot;
+        return left;
+
+
+    }
+
+    /**
+     * 找到链表最后一个节点
+     *
+     * @param head
+     * @return
+     */
+    private LinkNode findLast(LinkNode head) {
+        if (head == null) {
+            return null;
+        }
+        LinkNode cur = head;
+        while (cur.next != null) {
+            cur = cur.next;
+        }
+        return cur;
     }
 
     /**
@@ -282,13 +338,14 @@ public class LinkSomeMethod {
         }
         LinkNode l = new LinkNode(0), pre = l;
         l.next = head;
-        while (head != null) {
-            if (head.val == val) {
-                pre.next = head.next;
-                break;
+        LinkNode cur = head;
+        while (cur != null) {
+            if (cur.val == val) {
+                pre.next = cur.next;
+            } else {
+                pre = pre.next;
             }
-            pre = head;
-            head = head.next;
+            cur = cur.next;
         }
         return l.next;
     }

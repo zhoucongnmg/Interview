@@ -6,4 +6,11 @@ public class LinkNode {
 	public LinkNode(int val){
 		this.val = val;
 	}
+
+	@Override
+	public String toString() {
+		return "LinkNode{" +
+				"val=" + val +
+				'}';
+	}
 }

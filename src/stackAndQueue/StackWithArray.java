@@ -9,7 +9,8 @@ package stackAndQueue;
 public class StackWithArray<T> {
 
     private T[] a;
-    private int size;
+    private int count = 0;
+    private int capacity;
     private int index = -1;
 
     public static void main(String[] args) {
@@ -24,16 +25,17 @@ public class StackWithArray<T> {
         }
     }
 
-    public StackWithArray(int size) {
-        a = (T[]) new Object[size];
-        this.size = size;
+    public StackWithArray(int capacity) {
+        a = (T[]) new Object[capacity];
+        this.capacity = capacity;
     }
 
     public void push(T ele) {
-        if (a.length == size) {
+        if (a.length == count) {
             addCapcity();
         }
         index++;
+        count++;
         a[index] = ele;
     }
 
@@ -44,21 +46,22 @@ public class StackWithArray<T> {
         T ele = a[index];
         a[index] = null;
         index--;
+        count--;
         return ele;
     }
 
     public int size() {
-        return index + 1;
+        return count;
     }
 
     public boolean isEmpty() {
-        return index == -1;
+        return count == 0;
     }
 
     //扩容
     public void addCapcity() {
-        size *= 2;
-        T[] temp = (T[]) new Object[size];
+        capacity *= 2;
+        T[] temp = (T[]) new Object[capacity];
         //此处注意 arraycopy均为小写
         System.arraycopy(a, 0, temp, 0, a.length);
         a = temp;

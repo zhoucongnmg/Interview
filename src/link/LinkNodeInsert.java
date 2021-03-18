@@ -7,15 +7,18 @@ package link;
  */
 public class LinkNodeInsert {
     public static void main(String[] args) {
-        LinkNode l1 = new LinkNode(1);
-        LinkNode l2 = new LinkNode(3);
+        LinkNode l1 = new LinkNode(2);
+        LinkNode l2 = new LinkNode(4);
         l1.next = l2;
         l2.next = l1;
-        LinkNode n = insert(l1,0);
+        LinkNode n = insert(l1, 3);
         LinkNode p = n;
-        while(p.next !=n){
+        while (true) {
             System.out.println(p.val);
             p = p.next;
+            if (p == n) {
+                break;
+            }
         }
     }
 
@@ -25,25 +28,24 @@ public class LinkNodeInsert {
             newHead.next = newHead;
             return newHead;
         }
-        LinkNode tail = head;
-        while (tail.next != head) {
-            tail = tail.next;
-        }
-        LinkNode newHead = new LinkNode(0);
-        newHead.next = head;
-        tail.next = newHead;
-        LinkNode pre = newHead, cur = head;
-        while (true) {
-            if(cur == newHead || cur.val >= a){
-                LinkNode i = new LinkNode(a);
-                i.next = cur;
-                pre.next = i;
-                break;
-            }else {
-                pre = cur;
-                cur = cur.next;
+        if (a <= head.val) {
+            LinkNode tail = head;
+            while (tail.next != head) {
+                tail = tail.next;
             }
+            LinkNode newHead = new LinkNode(a);
+            newHead.next = head;
+            tail.next = newHead;
+            return newHead;
         }
-        return newHead.next;
+        LinkNode pre = head, cur = head.next;
+        while (cur != head && a > cur.val) {
+            pre = pre.next;
+            cur = cur.next;
+        }
+        LinkNode n = new LinkNode(a);
+        n.next = cur;
+        pre.next = n;
+        return head;
     }
 }

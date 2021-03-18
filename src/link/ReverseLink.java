@@ -23,7 +23,7 @@ public class ReverseLink {
 
         ReverseLink rl = new ReverseLink();
         LinkSomeMethod ls = new LinkSomeMethod();
-        LinkNode h = rl.reverseFromNToM(l1, 31, 8);
+        LinkNode h = rl.reverseFromNToM(l1, 1, 3);
 
         ls.printLink(h);
 
@@ -83,13 +83,10 @@ public class ReverseLink {
             l = l.next;
             n--;
         }
-        if (n > 1 || l == null) {
+        if (l == null || l.next == null) {
             return head;
         }
         LinkNode pre = l.next;
-        if (pre == null) {
-            return head;
-        }
         LinkNode cur = pre.next, temp = null;
         while (cur != null && k > 0) {
             temp = cur.next;

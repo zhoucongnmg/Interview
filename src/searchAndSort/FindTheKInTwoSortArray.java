@@ -14,6 +14,7 @@ public class FindTheKInTwoSortArray {
         FindTheKInTwoSortArray ft = new FindTheKInTwoSortArray();
         System.out.println(ft.find(a, b, 6));
         System.out.println(ft.find(a, b, 2));
+        System.out.println(ft.find(a, null, 2));
         System.out.println(ft.find(a, c, 3));
     }
 
@@ -24,10 +25,10 @@ public class FindTheKInTwoSortArray {
             return null;
         }
         if (a == null) {
-            return b.length >= k ? b[k - 1] : null;
+            return b.length >= k ? b[b.length - k] : null;
         }
         if (b == null) {
-            return a.length >= k ? a[k - 1] : null;
+            return a.length >= k ? a[a.length - k] : null;
         }
         if (a.length + b.length < k) {
             return null;

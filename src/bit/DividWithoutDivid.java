@@ -2,7 +2,7 @@ package bit;
 
 /**
  * 不用乘除号实现除法
- *
+ * <p>
  * 运算时注意符号，注意整数边界（整数相加、相乘、取绝对值）
  *
  * @author zc
@@ -19,7 +19,7 @@ public class DividWithoutDivid {
         }
     }
 
-    public int divide(int dividend, int divisor) throws Exception {
+    public long divide(int dividend, int divisor) throws Exception {
         if (divisor == 0) {
             throw new Exception();
         }
@@ -47,12 +47,10 @@ public class DividWithoutDivid {
             temp = div2;
         }
         if (sign == -1) {
-            //符号取反，正号变符号，符号变正号
+            //符号取反，正号变符号，符号变正号,题目规定不许用乘除法
             result = ~result + 1;
-        } else if (result > Integer.MAX_VALUE) {
-            result = Integer.MAX_VALUE;
         }
-        return (int) result;
+        return result;
     }
 
 }

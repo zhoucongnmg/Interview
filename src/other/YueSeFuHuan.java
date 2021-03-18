@@ -16,6 +16,7 @@ public class YueSeFuHuan {
     /**
      * @param n 总人数为n
      * @param m 步长为m
+     * https://www.jianshu.com/p/6ee5c7b21333
      * @return
      */
     public int method(int n, int m) {

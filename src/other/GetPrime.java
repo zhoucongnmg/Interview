@@ -1,6 +1,8 @@
 package other;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * 筛选法求n以内素数
@@ -11,13 +13,14 @@ public class GetPrime {
 
     public static void main(String[] args) {
         GetPrime gp = new GetPrime();
-        gp.printPrime(100);
+        System.out.println(gp.printPrime(100));
     }
 
-    public void printPrime(int n) {
+    public List<Integer> printPrime(int n) {
         if (n < 2) {
-            return;
+            return null;
         }
+        List<Integer> result = new ArrayList<>();
         boolean[] isPrime = new boolean[n + 1];
         Arrays.fill(isPrime, true);
         for (int i = 2; i <= n / 2; i++) {
@@ -31,8 +34,9 @@ public class GetPrime {
         //注意 i从2开始取
         for (int i = 2; i <= n; i++) {
             if (isPrime[i]) {
-                System.out.print(i + "  ");
+                result.add(i);
             }
         }
+        return result;
     }
 }

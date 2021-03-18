@@ -15,8 +15,8 @@ public class BlockingQueue<T> {
     private int index = -1;
     private int count = 0;
 
-    public BlockingQueue(int capcity) {
-        arrays = new Object[capcity];
+    public BlockingQueue(int capacity) {
+        arrays = new Object[capacity];
         lock = new ReentrantLock();
         notEmpty = lock.newCondition();
         notFull = lock.newCondition();

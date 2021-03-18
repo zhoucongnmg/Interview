@@ -22,6 +22,7 @@ public class SomeRandomMethod {
      * 蓄水池抽样问题
      * 现在有100个数，我要选10个数出来，每个数选出来的概率要是均等。
      * 在数组a中随机抽取n个数，要求每个数被抽到的概率相同
+     * https://www.cnblogs.com/yuanmingzhou/p/11093575.html
      * <p>
      * 注意随机数转int
      */
@@ -75,6 +76,10 @@ public class SomeRandomMethod {
         return int0To8 + 1;
     }
 
+    /**
+     * 因为是1-3（0-2），所以乘以3，变成0，3，6，和1，2，3随机相加得到1，2，3，4，5，6，7，8，9
+     * @return
+     */
     public static int get0TO8() {
         return (random3() - 1) * 3 + random3() - 1;
     }
