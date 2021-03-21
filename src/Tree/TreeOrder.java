@@ -23,20 +23,20 @@ public class TreeOrder {
 
         TreeOrder to = new TreeOrder();
 
-        // System.out.println("后序遍历为");
-        // to.postOrder(t1);
+//        System.out.println("后序遍历为");
+//        System.out.println(to.postOrder(t1).toString());
 
-        // System.out.println("中序遍历为");
-        // to.inOrder(t1);
+//        System.out.println("中序遍历为");
+//        System.out.println(to.inOrder(t1).toString());
 
-        // System.out.println("先序遍历为");
-        // to.preOrder(t1);
+//        System.out.println("先序遍历为");
+//        System.out.println(to.preOrder(t1).toString());
 
         System.out.println("层次遍历为");
         to.levelOrder(t1);
         // to.levelOrder2(t1);
         System.out.println("层次遍历输出偶数层");
-        ArrayList<ArrayList<TreeNode>> arr = new ArrayList();
+        ArrayList<ArrayList<TreeNode>> arr = new ArrayList<>();
         to.levelOrder3(t1, arr, 0);
         arr.forEach(i -> {
             i.forEach(j -> System.out.print(j.val));
@@ -48,10 +48,11 @@ public class TreeOrder {
     /**
      * 后根遍历
      */
-    public void postOrder(TreeNode root) {
+    public List<TreeNode> postOrder(TreeNode root) {
         if (root == null) {
-            return;
+            return null;
         }
+        List<TreeNode> result = new ArrayList<>();
         Stack<TreeNode> s = new Stack<>();
         s.push(root);
         TreeNode temp = null;
@@ -68,19 +69,20 @@ public class TreeOrder {
                 }
             } else {
                 s.pop();
-                System.out.print(temp.val + " ");
+                result.add(temp);
             }
         }
-        System.out.println();
+        return result;
     }
 
     /**
      * 中序遍历递归
      */
-    public void inOrder(TreeNode root) {
+    public List<TreeNode> inOrder(TreeNode root) {
         if (root == null) {
-            return;
+            return null;
         }
+        List<TreeNode> result = new ArrayList<>();
         TreeNode temp = null;
         Stack<TreeNode> s = new Stack<>();
         s.push(root);
@@ -88,7 +90,8 @@ public class TreeOrder {
             temp = s.peek();
             temp.popTimes++;
             if (temp.popTimes == 2) {
-                System.out.print(temp.val + " ");
+                s.pop();
+                result.add(temp);
                 if (temp.right != null) {
                     s.push(temp.right);
                 }
@@ -98,22 +101,23 @@ public class TreeOrder {
                 }
             }
         }
-        System.out.println();
+        return result;
     }
 
     /**
      * 先根遍历
      */
-    public void preOrder(TreeNode root) {
+    public List<TreeNode> preOrder(TreeNode root) {
         if (root == null) {
-            return;
+            return null;
         }
         Stack<TreeNode> s = new Stack<>();
+        List<TreeNode> result = new ArrayList<>();
         s.push(root);
         TreeNode temp = null;
         while (!s.isEmpty()) {
             temp = s.pop();
-            System.out.print(temp.val + " ");
+            result.add(temp);
             if (temp.right != null) {
                 s.push(temp.right);
             }
@@ -121,22 +125,23 @@ public class TreeOrder {
                 s.push(temp.left);
             }
         }
-        System.out.println();
+        return result;
     }
 
     /**
      * 层次遍历，非递归
      */
-    public void levelOrder(TreeNode root) {
+    public List<TreeNode> levelOrder(TreeNode root) {
         if (root == null) {
-            return;
+            return null;
         }
+        List<TreeNode> result = new ArrayList<>();
         TreeNode temp = null;
         Queue<TreeNode> q = new LinkedList<>();
         q.offer(root);
         while (!q.isEmpty()) {
             temp = q.poll();
-            System.out.print(temp.val + " ");
+            result.add(temp);
             if (temp.left != null) {
                 q.offer(temp.left);
             }
@@ -144,7 +149,7 @@ public class TreeOrder {
                 q.offer(temp.right);
             }
         }
-        System.out.println();
+        return result;
     }
 
     // 层次遍历递归

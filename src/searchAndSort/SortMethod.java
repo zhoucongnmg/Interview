@@ -1,5 +1,6 @@
 package searchAndSort;
 
+import java.util.Arrays;
 import java.util.Stack;
 
 /**
@@ -16,11 +17,11 @@ public class SortMethod {
         Integer[] a1 = {1};
 //		sm.maopaoSort(a);
 //        sm.mergeSort(s, 0, s.length - 1);
-        sm.quickSort(a1, 0, a1.length - 1);
-//        sm.quickSort(a);
+//        sm.quickSort(a, 0, a.length - 1);
+        sm.quickSort(a);
 //        sm.heapSort(a);
-//        sm.printArray(a);
-        sm.printArray(a1);
+        sm.printArray(a);
+//        sm.printArray(a1);
     }
 
     /**
@@ -86,15 +87,8 @@ public class SortMethod {
         System.arraycopy(temp, 0, a, start, end - start + 1);
     }
 
-    /**
-     * 递归快排
-     */
     public <T extends Comparable<T>> void quickSort(T[] a, int start, int end) {
         if (a == null || start >= end) {  //注意此处的判断
-            return;
-        }
-        if (end - start <= 2) {
-            setMid(a, start, end);
             return;
         }
         int pivot = getPivot(a, start, end);
@@ -102,37 +96,21 @@ public class SortMethod {
         quickSort(a, pivot + 1, end);
     }
 
-    public <T extends Comparable<T>> void setMid(T[] a, int start, int end) {
-        int mid = (start + end) / 2;
-        if (a[start].compareTo(a[mid]) > 0) {
-            swap(a, start, mid);
-        }
-        if (a[start].compareTo(a[end]) > 0) {
-            swap(a, start, end);
-        }
-        if (a[mid].compareTo(a[end]) > 0) {
-            swap(a, mid, end);
-        }
-        swap(a, mid, end - 1);
-    }
-
     public <T extends Comparable<T>> int getPivot(T[] a, int start, int end) {
-        setMid(a, start, end);
-        int i = start, j = end - 2;
-        //此处需要注意，为end-1，而不是end-2
-        T k = a[end - 1];
+        T k = a[start];
+        int i = start, j = end;
         while (i < j) {
-            while (a[i].compareTo(k) < 0) {
-                i++;
-            }
-            while (a[j].compareTo(k) > 0) {
+            while (i < j && a[j].compareTo(k) >= 0) {
                 j--;
+            }
+            while (i < j && a[i].compareTo(k) <= 0) {
+                i++;
             }
             if (i < j) {
                 swap(a, i, j);
             }
         }
-        swap(a, i, end - 1);
+        swap(a, i, start);
         return i;
     }
 
@@ -151,10 +129,6 @@ public class SortMethod {
             start = stack.pop();
             end = stack.pop();
             if (start >= end) {
-                continue;
-            }
-            if (end - start <= 2) {
-                setMid(a, start, end);
                 continue;
             }
             int pivot = getPivot(a, start, end);

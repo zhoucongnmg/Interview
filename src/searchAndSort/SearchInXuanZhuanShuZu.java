@@ -15,15 +15,23 @@ public class SearchInXuanZhuanShuZu {
         int[] c = {7, 8, 9, 1, 2, 3, 4, 5, 6};
         int[] d = {1, 2, 1, 1, 1};
         int[] f = {2, 2, 3, 1};
+        int[] f1 = {2, 2, 1};
+        int[] f2 = {1, 2, 2};
         int[] e = {5, 6, 6, 7, 8, 1, 2, 3, 4};
-        int[] g = {5,4,3,6};
+        int[] g = {5, 4, 3, 6};
+        int[] g1 = {1, 2, 3, 4};
+        int[] g2 = {4, 3, 2, 1};
         SearchInXuanZhuanShuZu s = new SearchInXuanZhuanShuZu();
         System.out.println(s.findPartMin(g));
+        System.out.println(s.findPartMin(g1));
+        System.out.println(s.findPartMin(g2));
 //        System.out.println(s.findMax(a, 0, a.length - 1));
 //        System.out.println(s.findMax(b, 0, b.length - 1));
 //        System.out.println(s.findMax(c, 0, c.length - 1));
 //        System.out.println(s.findMax(d, 0, d.length - 1));
 //        System.out.println(s.findMax(f, 0, f.length - 1));
+//        System.out.println(s.findMax(f1, 0, f1.length - 1));
+//        System.out.println(s.findMax(f2, 0, f2.length - 1));
 //        System.out.println(s.findK(e, 8));
 //        System.out.println(s.findK(e, 6));
 //        System.out.println(s.findK(e, 4));
@@ -49,11 +57,8 @@ public class SearchInXuanZhuanShuZu {
         } else if (a[mid] < a[start]) {
             return findMax(a, start, mid - 1);
         } else {
-            if (mid == start) {
-                return a[start] > a[end] ? a[start] : a[end];
-            }
             if (a[mid] > a[end]) {
-                return findMax(a, mid, end);
+                return findMax(a, mid, end - 1);
             } else if (a[mid] < a[end]) {
                 return a[end];
             } else {
@@ -96,7 +101,7 @@ public class SearchInXuanZhuanShuZu {
             if (a[mid] > a[start]) {
                 return start;
             } else if (a[mid] < a[start]) {
-                return findMin(a, start, mid);
+                return findMin(a, start - 1, mid);
             } else {
                 return findmin(a, start, end);
             }

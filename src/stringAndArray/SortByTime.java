@@ -16,12 +16,12 @@ public class SortByTime {
         SortByTime sbt = new SortByTime();
 
         String[] s = {"a", "b", "b", "c", "c", "c"};
-        sbt.sortByTime(s);
+        System.out.println(sbt.sortByTime(s).toString());
     }
 
-    public void sortByTime(String[] a) {
+    public List<Map.Entry<String, Integer>> sortByTime(String[] a) {
         if (a == null || a.length == 0) {
-            return;
+            return null;
         }
         Map<String, Integer> map = new HashMap<>();
         for (String s : a) {
@@ -34,6 +34,6 @@ public class SortByTime {
         List<Map.Entry<String, Integer>> list = new ArrayList<>(map.entrySet());
         list.sort((e1, e2) -> e2.getValue() - e1.getValue());
 
-        System.out.print(list);
+        return list;
     }
 }

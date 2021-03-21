@@ -42,6 +42,9 @@ public class ErShiLiuJingZhi {
         int sum = 0;
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
+            if (!Character.isUpperCase(c)) {
+                return -1;
+            }
             sum = sum * 26 + (c - 'A' + 1);
         }
         return sum;

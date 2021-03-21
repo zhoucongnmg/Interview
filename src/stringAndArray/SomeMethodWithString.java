@@ -1,7 +1,6 @@
 package stringAndArray;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 
 /**
@@ -17,20 +16,22 @@ public class SomeMethodWithString {
 //        System.out.println(sm.longDupSub(s));
 //        System.out.println(sm.longNotDupSub(s));
 //        System.out.println(sm.shortEditLen("sailn", "failing"));
-//        int[] a = {-2, 11, -4, 13, -5, 2};
-//        int[] b = {1, -3, 4, -2, -1, 6};
+        int[] a = {-2, 11, -4, 13, -5, 2};
+        int[] b = {1, -3, 4, -2, -1, 6};
+        System.out.println(sm.findLengthOfLCIS(a));
+        System.out.println(sm.findLengthOfLCIS(b));
 //        System.out.println(sm.maxSum(a));
 //        System.out.println(sm.maxSum(b));
 
 //        System.out.println(sm.longestSameSubString("vvsenk", "jvvenksssssss"));
-        System.out.println(sm.longestSameSubXulie("abcdef", "zbhdf"));
-        System.out.println(sm.zuiChangHuiWen("babcbabcbaccba"));
+//        System.out.println(sm.longestSameSubString2("vvsenk", "jvvenksssssss"));
+//        System.out.println(sm.longestSameSubXulie("vvsenk", "jvvenksssssss"));
+//        System.out.println(sm.longestSameSubXulie("abcdef", "zbhdf"));
+//        System.out.println(sm.zuiChangHuiWen("babcbabcbaccba"));
 
         int[] c = {6, 7, 3, 4, 5, 5, 1, 2};
-        int[] result = sm.longestIncreaseSub(c);
-        for (int i : result) {
-            System.out.print(i + " ");
-        }
+        System.out.println(sm.longestIncreaseSub(c).toString());
+
     }
 
     /**
@@ -126,33 +127,6 @@ public class SomeMethodWithString {
     }
 
     /**
-     * 最大连续子序列和问题
-     */
-    public int maxSum(int[] a) {
-        if (a == null) {
-            return -1;
-        }
-        if (a.length == 0) {
-            return 0;
-        }
-        int curStart = 0, curSum = 0;
-        int maxStart = 0, maxSum = 0, maxEnd = 0;
-        for (int i = 0; i < a.length; i++) {
-            curSum += a[i];
-            if (curSum > maxSum) {
-                maxStart = curStart;
-                maxSum = curSum;
-                maxEnd = i;
-            } else if (curSum < 0) {
-                curStart = i + 1;
-                curSum = 0;
-            }
-        }
-        System.out.println("起始点为 " + maxStart + "终止点为 " + maxEnd);
-        return maxSum;
-    }
-
-    /**
      * 最长公共子串，要求连续
      * http://www.cnblogs.com/zhangchaoyang/articles/2012070.html
      */
@@ -188,6 +162,39 @@ public class SomeMethodWithString {
     }
 
     /**
+     * 最长公共子串，要求连续
+     */
+    public String longestSameSubString2(String s1, String s2) {
+        if (s1 == null || s2 == null) {
+            return null;
+        }
+        if (s1.length() == 0 || s2.length() == 0) {
+            return "";
+        }
+
+        int len1 = s1.length(), len2 = s2.length();
+        int[][] dp = new int[len1 + 1][len2 + 1];
+        int maxLen = 0, maxEnd = 0;
+        for (int i = 1; i <= s1.length(); i++) {
+            for (int j = 1; j <= s2.length(); j++) {
+                if (s1.charAt(i - 1) == s2.charAt(j - 1)) {
+                    dp[i][j] = dp[i - 1][j - 1] + 1;
+                } else {
+                    dp[i][j] = 0;
+                }
+                if (dp[i][j] > maxLen) {
+                    maxLen = dp[i][j];
+                    maxEnd = j;
+                }
+            }
+        }
+        if (maxLen == 0) {
+            return "";
+        }
+        return s2.substring(maxEnd - maxLen, maxEnd);
+    }
+
+    /**
      * 最长公共子序列，不要求连续
      */
     public String longestSameSubXulie(String s1, String s2) {
@@ -201,16 +208,7 @@ public class SomeMethodWithString {
         //dp[i][j]表示s1的前i位和s2的前j位两个子串的最长公共子序列，所以逐步求到dp[i][j]即为所求
         int[][] dp = new int[len1 + 1][len2 + 1];
 
-        StringBuilder sb = new StringBuilder();
         int maxCount = 0;
-
-        for (int i = 0; i <= len1; i++) {
-            dp[i][0] = 0;
-        }
-        for (int j = 0; j <= len2; j++) {
-            dp[0][j] = 0;
-        }
-
         for (int i = 1; i <= len1; i++) {
             for (int j = 1; j <= len2; j++) {
                 if (s1.charAt(i - 1) == s2.charAt(j - 1)) {
@@ -220,11 +218,22 @@ public class SomeMethodWithString {
                 }
                 if (dp[i][j] > maxCount) {
                     maxCount = dp[i][j];
-                    sb.append(s1.charAt(i - 1));
                 }
             }
         }
-        return sb.toString();
+        //回溯dp，找到最长公共子序列
+        int cur = maxCount;
+        StringBuilder sb = new StringBuilder();
+        for (int i = s1.length(); i > 0; i--) {
+            for (int j = s2.length(); j > 0; j--) {
+                if (s1.charAt(i - 1) == s2.charAt(j - 1) && dp[i][j] == cur) {
+                    cur--;
+                    sb.append(s2.charAt(j - 1));
+                    break;
+                }
+            }
+        }
+        return sb.reverse().toString();
     }
 
     /**
@@ -257,6 +266,33 @@ public class SomeMethodWithString {
 
 
     /**
+     * 最大连续子序列和问题
+     */
+    public int maxSum(int[] a) {
+        if (a == null) {
+            return -1;
+        }
+        if (a.length == 0) {
+            return 0;
+        }
+        int curStart = 0, curSum = 0;
+        int maxStart = 0, maxSum = 0, maxEnd = 0;
+        for (int i = 0; i < a.length; i++) {
+            curSum += a[i];
+            if (curSum > maxSum) {
+                maxStart = curStart;
+                maxSum = curSum;
+                maxEnd = i;
+            } else if (curSum < 0) {
+                curStart = i + 1;
+                curSum = 0;
+            }
+        }
+        System.out.println("起始点为 " + maxStart + "终止点为 " + maxEnd);
+        return maxSum;
+    }
+
+    /**
      * 最长递增连续子序列长度
      */
     public int findLengthOfLCIS(int[] a) {
@@ -266,7 +302,7 @@ public class SomeMethodWithString {
         if (a.length == 1) {
             return 1;
         }
-        int max = 1, start = 0, cur = 1;
+        int max = 1, start = 0, cur = 1, maxStart = 0;
         for (int i = 1; i < a.length; i++) {
             if (a[i] > a[i - 1]) {
                 cur = i - start + 1;
@@ -276,8 +312,10 @@ public class SomeMethodWithString {
             }
             if (cur > max) {
                 max = cur;
+                maxStart = start;
             }
         }
+        System.out.println("最长递增连续子序列" + maxStart);
         return max;
     }
 
@@ -286,15 +324,15 @@ public class SomeMethodWithString {
      * 注意
      */
 
-    public int[] longestIncreaseSub(int[] a) {
+    public List<Integer> longestIncreaseSub(int[] a) {
         if (a == null || a.length == 0) {
-            return a;
+            return null;
         }
         int[] temp = new int[a.length];
         int[] dp = new int[a.length];  //dp[i]表示以a[i]为结尾的最长递增子序列长度
         int len = 0; //表示temp中元素个数
         for (int i = 0; i < a.length; i++) {
-            int j = binarySearch(temp, 0, len - 1, a[i]);
+            int j = binarySearch(temp, 0, len-1, a[i]);
             temp[j] = a[i];
             dp[i] = j + 1;
             if (j + 1 > len) {
@@ -319,19 +357,21 @@ public class SomeMethodWithString {
         }
     }
 
-    public int[] getResult(int[] a, int[] dp, int len) {
-        int[] result = new int[len];
+    public List<Integer> getResult(int[] a, int[] dp, int len) {
+        List<Integer> result = new ArrayList<>();
         int before = Integer.MAX_VALUE;
-        int index = len - 1;
+        int index = len;
         for (int i = dp.length - 1; i >= 0; i--) {
-            if (dp[i] == index + 1 && a[i] < before) {
-                result[index--] = a[i];
+            if (dp[i] == index && a[i] < before) {
+                result.add(a[i]);
                 before = a[i];
+                index--;
             }
             if (index < 0) {
                 break;
             }
         }
+        Collections.reverse(result);
         return result;
     }
 

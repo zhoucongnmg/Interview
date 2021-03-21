@@ -8,7 +8,7 @@ public class ConstrcutTreeFromOrder {
 
         int[] inorder = {1, 2, 3, 4, 5, 10};
         int[] postorder = {1, 2, 4, 3, 10, 5};
-        tr.levelOrder(ct.buildTree(inorder, postorder));
+        System.out.println(tr.levelOrder(ct.buildTree(inorder, postorder)).toString());
     }
 
     /**

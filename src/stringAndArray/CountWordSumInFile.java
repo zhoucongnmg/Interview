@@ -2,10 +2,7 @@ package stringAndArray;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -57,6 +54,12 @@ public class CountWordSumInFile {
         }
         List<Map.Entry<String, Integer>> list = new ArrayList<>(map.entrySet());
         list.sort((e1, e2) -> e2.getValue() - e1.getValue());
+//        list.sort(new Comparator<Map.Entry<String, Integer>>() {
+//            @Override
+//            public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+//                return o2.getValue()-o1.getValue();
+//            }
+//        });
 
         for (int i = 0; i < 10; i++) {
             System.out.println(list.get(i).getKey() + "  " + list.get(i).getValue());

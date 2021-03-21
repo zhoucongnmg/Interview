@@ -2,15 +2,19 @@ package stringAndArray;
 
 import java.util.*;
 
+
 public class TwoSum {
     public static void main(String[] args) {
         TwoSum twoSum = new TwoSum();
         int[] a = {1, 2, 3, 4, 5};
         List<List<Integer>> list = twoSum.kSum(a, 4, 10);
-        System.out.println();
+        System.out.println(list.toString());
     }
 
-    //两个数的和为指定值 有序
+    /**
+     * leecode:167
+     * 两个数的和为指定值 有序
+     */
     public int[] twoSum(int[] numbers, int target) {
         if (numbers == null || numbers.length < 2) {
             return null;
@@ -31,7 +35,14 @@ public class TwoSum {
         return re;
     }
 
-    //两个数的和，无序
+    /**
+     * leetcode:1
+     * 两个数的和，无序
+     *
+     * @param nums
+     * @param target
+     * @return
+     */
     public int[] twoSum2(int[] nums, int target) {
         if (nums == null || nums.length < 2) {
             return null;
@@ -49,11 +60,18 @@ public class TwoSum {
         return a;
     }
 
-    //三个数的和，不看
+    /**
+     * leetcode:15
+     * 三个数的和
+     *
+     * @param nums
+     * @return
+     */
     public List<List<Integer>> threeSum(int[] nums) {
         Arrays.sort(nums);
         List<List<Integer>> returnList = new ArrayList<>();
-        for (int i = 0; i < nums.length - 2; i++) {
+        //i后面至少留两个数
+        for (int i = 0; i <= nums.length - 3; i++) {
             if (i > 0 && nums[i] == nums[i - 1]) {
                 continue;
             }
@@ -84,8 +102,13 @@ public class TwoSum {
         return returnList;
     }
 
-    //四个数和，从而引申到k个数和，叹为观止，除头条外不用看
-
+    /**
+     * 四个数和，从而引申到k个数和
+     * @param a
+     * @param k
+     * @param sum
+     * @return
+     */
     public List<List<Integer>> kSum(int[] a, int k, int sum) {
         Arrays.sort(a);
         if (a == null || a.length < k) {
@@ -126,7 +149,7 @@ public class TwoSum {
             for (int i = start; i <= end - k + 1; i++) {
                 cur.add(a[i]);
                 kSum(a, k - 1, i + 1, end, sum - a[i], cur, result);
-                cur.remove(cur.size()-1);
+                cur.remove(cur.size() - 1);
             }
         }
     }

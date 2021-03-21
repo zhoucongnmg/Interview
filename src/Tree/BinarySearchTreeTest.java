@@ -28,18 +28,25 @@ public class BinarySearchTreeTest {
         printTree(root1);
     }
 
+    /**
+     * ²ã´Î±éÀú
+     *
+     * @param root
+     */
     private static void printTree(TreeNode root) {
         Queue<TreeNode> q = new LinkedList<TreeNode>();
         q.offer(root);
         while (!q.isEmpty()) {
-            System.out.print(q.peek().val);
-            if (q.peek().left != null) {
-                q.offer(q.peek().left);
+            TreeNode cur = q.poll();
+            ;
+            System.out.print(cur.val);
+            if (cur.left != null) {
+                q.offer(cur.left);
             }
-            if (q.peek().right != null) {
-                q.offer(q.peek().right);
+            if (cur.right != null) {
+                q.offer(cur.right);
             }
-            q.poll();
+
         }
 
     }

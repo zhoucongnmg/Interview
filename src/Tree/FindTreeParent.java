@@ -80,7 +80,7 @@ public class FindTreeParent {
             return node1;
         }
         // ´Ë´¦×¢Òâ
-        int len = list1.size() > list2.size() ? list2.size() : list1.size();
+        int len = Math.min(list1.size(), list2.size());
         for (int i = 0; i < len; i++) {
             if (list1.get(i) != list2.get(i)) {
                 return list1.get(i - 1);
@@ -130,7 +130,7 @@ public class FindTreeParent {
             return new Result(right.node, true);
         }
         if (root == node1 || root == node2) {
-            boolean is = left.node != null || right.node != null ? true : false;
+            boolean is = left.node != null || right.node != null;
             return new Result(root, is);
         }
         if (left.node == null || right.node == null) {

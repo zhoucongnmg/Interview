@@ -1,5 +1,7 @@
 package stringAndArray;
 
+import java.util.Arrays;
+
 /**
  * Ñ­»·ÒÆÎ»
  *
@@ -11,9 +13,7 @@ public class LeftShift {
         int[] a = {1, 2, 3, 4, 5};
         LeftShift lf = new LeftShift();
         lf.leftShift(a, 3);
-        for (int i : a) {
-            System.out.println(i);
-        }
+        System.out.println(Arrays.toString(a));
         System.out.println(lf.leftShift2("12345", 3));
         System.out.println(lf.isContains("abcd", "cda"));
     }
