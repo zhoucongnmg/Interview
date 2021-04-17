@@ -3,7 +3,7 @@ package link;
 /**
  * @author zhoucong
  * @time 2018/6/23
- * 一个有序单链表，头尾衔接成环，在不改变大小顺序的情况下插入一个新数字
+ * 一个有序单链表，头尾衔接成环，在不改变大小顺序的情况下一个新数字
  */
 public class LinkNodeInsert {
     public static void main(String[] args) {
@@ -25,7 +25,7 @@ public class LinkNodeInsert {
     public static LinkNode insert(LinkNode head, int a) {
         if (head == null) {
             LinkNode newHead = new LinkNode(a);
-            newHead.next = newHead;
+            newHead.next = newHead; //注意，首位成环
             return newHead;
         }
         if (a <= head.val) {

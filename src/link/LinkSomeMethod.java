@@ -23,7 +23,7 @@ public class LinkSomeMethod {
 
         l1.next = l2;
         l2.next = l3;
-        l4.next = l3;
+        l3.next = l4;
 
         System.out.println("第一个公共节点值为：" + ls.findParent(l1, l4).val);
         System.out.println("倒数第4个节点的值为：" + ls.findLaskKNode(l1, 4));
@@ -31,7 +31,8 @@ public class LinkSomeMethod {
         System.out.println("原链表为：");
         ls.printLink(l1);
 //        LinkNode newHead = ls.mergeSort(l1);
-        LinkNode newHead = ls.quickSort(l1);
+//        LinkNode newHead = ls.quickSort(l1);
+        LinkNode newHead = ls.insertionSortList(l1);
         System.out.println("排序后为：");
         ls.printLink(newHead);
 
@@ -50,7 +51,7 @@ public class LinkSomeMethod {
     }
 
     /**
-     * 判断链表是否有环,有环则返回快慢指针相交点
+     * 判断链表是否有环,有环则返回快慢指针相交点,leet:141
      */
     public LinkNode hasHuan(LinkNode head) {
         if (head == null) {
@@ -70,6 +71,7 @@ public class LinkSomeMethod {
 
     /**
      * 找到链表环的起点 方法一、遍历链表，将节点放于set中，第一个重复的节点即为环起点 方法二、如下
+     * leet：142
      */
     public LinkNode findHuanIn(LinkNode head) {
         if (head == null) {
@@ -178,6 +180,7 @@ public class LinkSomeMethod {
 
     /**
      * 找链表倒数第k个节点
+     * 	剑指 Offer 22
      */
     public LinkNode findLaskKNode(LinkNode head, int k) {
         if (head == null || k <= 0) {
@@ -200,6 +203,7 @@ public class LinkSomeMethod {
 
     /**
      * 合并两个有序链表，非递归实现
+     * leet:21
      */
     public LinkNode mergeTwoLink(LinkNode head1, LinkNode head2) {
         if (head1 == null) {
@@ -294,7 +298,9 @@ public class LinkSomeMethod {
             }
             cur = cur.next;
         }
+        //此处需要注意，要把链表断开在递归
         leftTail.next = null;
+        rightTail.next = null;
         LinkNode left = quickSort(leftHead.next);
         LinkNode right = quickSort(rightHead.next);
         LinkNode leftLast = findLast(left);
@@ -306,6 +312,41 @@ public class LinkSomeMethod {
         return left;
 
 
+    }
+
+    /**
+     * 单链表插入排序
+     */
+    public LinkNode insertionSortList(LinkNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        LinkNode tempH = new LinkNode(0);
+        tempH.next = head;
+        LinkNode end = head, cur = head.next, temp = null;
+        while (cur != null) {
+            temp = cur.next;
+            cur.next = null;
+            end = insert(tempH, end, cur);
+            cur = temp;
+        }
+        return tempH.next;
+    }
+
+    private LinkNode insert(LinkNode start, LinkNode end, LinkNode k) {
+        LinkNode pre = start, cur = start.next;
+        if (k.val > end.val) {
+            end.next = k;
+            return k;
+        }
+        while (cur != end && cur.val < k.val) {
+            pre = pre.next;
+            cur = cur.next;
+        }
+        pre.next = k;
+        k.next = cur;
+        end.next = null;
+        return end;
     }
 
     /**

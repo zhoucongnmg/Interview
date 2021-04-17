@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * 筛选法求n以内素数
- *
+ * 没写上
  * @author zc
  */
 public class GetPrime {

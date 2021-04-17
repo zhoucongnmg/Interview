@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * 找出这个链表中某一段元素，使得这些元素的和 等于某个给定的值，这样的一段元素不一定存在。
- *
+ * leetcode里没有
  * @author zc
  */
 public class FindFromLinkWithSum {
@@ -56,21 +56,4 @@ public class FindFromLinkWithSum {
         }
         return result;
     }
-
-//    public void find(LinkNode head, int sum, List<LinkNode> path) {
-//        if (head == null) {
-//            return;
-//        }
-//        path.add(head);
-//        if (sum == head.val) {
-//            for (LinkNode linkNode : path) {
-//                System.out.print(linkNode.val+" ");
-//            }
-//            System.out.println();
-//            return;
-//        }
-//        find(head.next, sum - head.val, path);
-//        path.remove(path.size() - 1);
-////        find(head.next, sum, path);
-//    }
 }

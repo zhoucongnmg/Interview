@@ -2,7 +2,7 @@ package other;
 
 /**
  * 计算0-n中数字k出现的次数
- *
+ *leet：233
  * 注意，多次没写上
  *
  * @author zc
@@ -27,6 +27,7 @@ public class KSumFrom0ToN {
     }
 
     public int getSumByBit(int n, int k, int i) {
+        //此处注意，需要转一下
         int pow = (int) Math.pow(10, i);
         int cur = n / pow % 10;
         int before = n / pow / 10;

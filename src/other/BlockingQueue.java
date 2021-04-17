@@ -52,4 +52,9 @@ public class BlockingQueue<T> {
             lock.unlock();
         }
     }
+
+    public static void main(String[] args) throws InterruptedException {
+        BlockingQueue<Integer> queue = new BlockingQueue<>(1);
+        queue.put(1);
+    }
 }

@@ -40,6 +40,7 @@ public class ReverseLink {
             return head;
         }
         LinkNode pre = head, cur = head.next, temp = null;
+        //注意，此处一定先把headnext设为空
         pre.next = null;
         while (cur != null) {
             temp = cur.next;

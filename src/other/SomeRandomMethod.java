@@ -27,11 +27,8 @@ public class SomeRandomMethod {
      * 注意随机数转int
      */
     public int[] xuShuiChiChouYang(int[] a, int n) {
-        if (a == null) {
-            return null;
-        }
-        if (a.length < n) {
-            return null;
+        if (a == null || a.length <= n) {
+            return a;
         }
         int[] result = new int[n];
         for (int i = 0; i < a.length; i++) {

@@ -6,6 +6,7 @@ package link;
  */
 public class DeleteDupInLinkList {
 
+    //leet 83
     //Given 1->1->2->3->3, return 1->2->3.
     public LinkNode deleteDuplicates(LinkNode head) {
         if (head == null || head.next == null) {
@@ -22,6 +23,7 @@ public class DeleteDupInLinkList {
         return head;
     }
 
+    //leet 82
     //Given 1->1->1->2->3, return 2->3.
     //注意   1->1 的情况  应该返回空
     public LinkNode deleteDuplicates1(LinkNode head) {
@@ -38,7 +40,7 @@ public class DeleteDupInLinkList {
                 q = q.next;
             }
             if (p.next != q) {
-                p.next = q.next;  //此处是注意点
+                p.next = q.next;  //此处是注意点,此时千万不要移动p，case：[1,2,3,3,4,4,5]
                 q = q.next;
             } else {
                 p = p.next;

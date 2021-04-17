@@ -12,7 +12,7 @@ public class TheLargestK {
     public static void main(String[] args) {
         TheLargestK tk = new TheLargestK();
         int[] a = {1, 2, 3, 3, 3};
-//        System.out.println(tk.qSearch(a, 0, a.length - 1, 3));
+        System.out.println(tk.qSearch(a, 0, a.length - 1, 3));
         int[] b = {7, 8};
         System.out.println(tk.qSearch(b, 0, b.length - 1, 2));
 //        System.out.println(tk.qSearch2(a, 2));
@@ -32,10 +32,6 @@ public class TheLargestK {
         if (start >= end) {
             return a[k - 1];
         }
-        if (end - start <= 2) {
-            setMid(a, start, end);
-            return a[k - 1];
-        }
         int pivot = getPivot(a, start, end);
         if (pivot == k - 1) {
             return a[k - 1];
@@ -46,20 +42,6 @@ public class TheLargestK {
         }
     }
 
-    public void setMid(int[] a, int start, int end) {
-        int mid = start + (end - start) / 2;
-        if (a[start] < a[mid]) {
-            swap(a, start, mid);
-        }
-        if (a[start] < a[end]) {
-            swap(a, start, end);
-        }
-        if (a[mid] < a[end]) {
-            swap(a, mid, end);
-        }
-        swap(a, mid, end - 1);
-    }
-
     public void swap(int[] a, int i, int j) {
         int temp = a[i];
         a[i] = a[j];
@@ -67,23 +49,20 @@ public class TheLargestK {
     }
 
     public int getPivot(int[] a, int start, int end) {
-        setMid(a, start, end);
-        int i = start, j = end - 2;
-        int k = a[end - 1];
-        while (i <= j) {
-            while (a[i] > k) {
-                i++;
-            }
-            while (a[j] < k) {
+        int i = start, j = end;
+        int k = a[i];
+        while (i < j) {
+            while (i<j && a[j] < k) {
                 j--;
+            }
+            while (i<j && a[i] > k) {
+                i++;
             }
             if (i < j) {
                 swap(a, i, j);
-                i++;
-                j--;
             }
         }
-        swap(a, i, end - 1);
+        swap(a, i, start);
         return i;
     }
 
@@ -94,6 +73,9 @@ public class TheLargestK {
         if (a == null || a.length < k) {
             return -1;
         }
+        // ´ó¶¥¶Ñ
+//        PriorityQueue<Integer> left = new PriorityQueue<>((o1, o2) -> o2 - o1);
+        // Ð¡¶¥¶Ñ
         PriorityQueue<Integer> q = new PriorityQueue<>();
         for (int i : a) {
             if (q.size() == k) {

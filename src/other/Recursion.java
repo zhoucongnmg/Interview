@@ -20,6 +20,7 @@ public class Recursion {
 
     //青蛙跳台阶打印所有路径
     public static void jump(int cur, int sum, List<Integer> list) {
+        //注意此处，可能溢出
         if (cur > sum) {
             return;
         }
