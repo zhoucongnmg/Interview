@@ -13,6 +13,7 @@ public class StackWithTwoQueue<T> {
 
     Queue<T> pushQ;
     Queue<T> popQ;
+    private T top;
 
     public static void main(String[] args) {
         StackWithTwoQueue<Integer> stack = new StackWithTwoQueue<>();
@@ -35,6 +36,7 @@ public class StackWithTwoQueue<T> {
 
     public void push(T ele) {
         pushQ.offer(ele);
+        top = ele;
     }
 
     public T pop() {
@@ -42,11 +44,17 @@ public class StackWithTwoQueue<T> {
             return null;
         }
         while (pushQ.size() > 1) {
-            popQ.offer(pushQ.poll());
+            T ele = pushQ.poll();
+            popQ.offer(ele);
+            top = ele;
         }
         Queue<T> temp = pushQ;
         pushQ = popQ;
         popQ = temp;
         return popQ.poll();
+    }
+
+    public T peek(){
+        return top;
     }
 }

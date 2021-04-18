@@ -22,10 +22,10 @@ public class SearchInXuanZhuanShuZu {
         int[] g1 = {1, 2, 3, 4};
         int[] g2 = {4, 3, 2, 1};
         SearchInXuanZhuanShuZu s = new SearchInXuanZhuanShuZu();
-        System.out.println(s.findPartMin(g));
-        System.out.println(s.findPartMin(g1));
-        System.out.println(s.findPartMin(g2));
-//        System.out.println(s.findMax(a, 0, a.length - 1));
+//        System.out.println(s.findPartMin(g));
+//        System.out.println(s.findPartMin(g1));
+//        System.out.println(s.findPartMin(g2));
+        System.out.println(s.findMin(a, 0, a.length - 1));
 //        System.out.println(s.findMax(b, 0, b.length - 1));
 //        System.out.println(s.findMax(c, 0, c.length - 1));
 //        System.out.println(s.findMax(d, 0, d.length - 1));
@@ -48,6 +48,7 @@ public class SearchInXuanZhuanShuZu {
         if (a == null || a.length == 0) {
             return -1;
         }
+        //注意，不用判断start>end
         if (start == end) {
             return a[start];
         }
@@ -101,7 +102,7 @@ public class SearchInXuanZhuanShuZu {
             if (a[mid] > a[start]) {
                 return start;
             } else if (a[mid] < a[start]) {
-                return findMin(a, start - 1, mid);
+                return findMin(a, start + 1, mid);
             } else {
                 return findmin(a, start, end);
             }
@@ -139,6 +140,7 @@ public class SearchInXuanZhuanShuZu {
 
     /**
      * 局部最小，一个先降后升的数组中找到最小值下标
+     * 没写上
      */
     public int findPartMin(int[] a) {
         if (a == null || a.length == 0) {

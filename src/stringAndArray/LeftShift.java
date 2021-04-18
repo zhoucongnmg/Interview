@@ -35,11 +35,13 @@ public class LeftShift {
 
     /**
      * 左移字符串
+     * 剑指 Offer 58
      */
     public String leftShift2(String s, int k) {
         if (s == null || s.length() < 2) {
             return s;
         }
+        //注意k可能超过s长度
         k = k % s.length();
         String right = s.substring(0, k);
         String left = s.substring(k);

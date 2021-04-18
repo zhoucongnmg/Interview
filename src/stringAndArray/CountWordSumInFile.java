@@ -48,6 +48,7 @@ public class CountWordSumInFile {
         }
     }
 
+    //或者使用堆
     public void sortAndPrint(Map<String, Integer> map) {
         if (map == null) {
             return;

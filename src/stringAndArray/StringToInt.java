@@ -16,7 +16,7 @@ public class StringToInt {
 
     /**
      * String转为int
-     *
+     * leet:8
      */
     public Integer stringToInt(String s) {
         if (s == null || s.length() == 0) {
@@ -52,6 +52,7 @@ public class StringToInt {
 
     /**
      * 两个字符串相加（字符串代表的数字无限大会溢出）
+     * leet 415
      * 注意
      */
     public String addTwoString(String a, String b) {

@@ -16,6 +16,7 @@ public class BlockingQueue<T> {
     private int count = 0;
 
     public BlockingQueue(int capacity) {
+        //只要这样实例化数组，任何时候调用arrays.length 都是capacity
         arrays = new Object[capacity];
         lock = new ReentrantLock();
         notEmpty = lock.newCondition();

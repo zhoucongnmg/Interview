@@ -7,35 +7,44 @@ import java.util.Set;
 
 
 public class QuanPaiLie {
+    private static List<List<Character>> result = new ArrayList<>();
+
     public static void main(String[] args) {
         QuanPaiLie qpl = new QuanPaiLie();
         char[] c = {'a', 'b', 'c'};
-        qpl.quanPaiLie(c, 0, 2);
+        List<Character> cur = new ArrayList<>();
+        qpl.quanPaiLie(c, 0, 2, cur);
+        System.out.println(result);
+        System.out.println(combine(4,2));
     }
 
-    //字符串全排列
-    //递归时注意 递归出口
-    public void quanPaiLie(char[] a, int start, int end) {
-        if (start > end) {
+
+    /**
+     * 字符串全排列,leet:47, 注意
+     *
+     * @param a
+     * @param start
+     * @param end
+     * @param cur
+     */
+    public void quanPaiLie(char[] a, int start, int end, List<Character> cur) {
+        if (start == end) {
+            //此处注意，cur.add和cur.remove必须成对出现，
+            List<Character> curResult = new ArrayList<>(cur);
+            curResult.add(a[start]);
+            result.add(curResult);
             return;
         }
-        if (start == end) {
-            for (char c : a) {
-                System.out.print(c);
-            }
-            System.out.println();
-        } else {
-            Set<Character> set = new HashSet<>();
-            for (int i = start; i <= end; i++) {
-                //此处验重
-                if (set.contains(a[i])) {
-                    continue;
-                } else {
-                    set.add(a[i]);
-                }
+        Set<Character> set = new HashSet<>();
+        for (int i = start; i <= end; i++) {
+            //此处验重
+            if (!set.contains(a[i])) {
+                set.add(a[i]);
                 swap(a, start, i);
-                quanPaiLie(a, start + 1, end);
+                cur.add(a[start]);
+                quanPaiLie(a, start + 1, end, cur);
                 swap(a, start, i);
+                cur.remove(cur.size() - 1);
             }
         }
     }
@@ -48,31 +57,40 @@ public class QuanPaiLie {
 
     /**
      * leecode：77. 组合
-     *
+     * 注意
      * @param
      * @return
      */
-    public List<List<Integer>> combine(int n, int k) {
+    public static List<List<Integer>> combine(int n, int k) {
         List<List<Integer>> combinations = new ArrayList<>();
         List<Integer> combineList = new ArrayList<>();
         backtracking(combineList, combinations, 1, k, n);
         return combinations;
     }
 
-    private void backtracking(List<Integer> combineList, List<List<Integer>> combinations, int start, int k, final int n) {
+    private static void backtracking(List<Integer> combineList, List<List<Integer>> combinations, int start, int k, int end) {
+        //注意千万不能带start>end,否则会过滤掉最后一位
+//        if (start > end) {
+//            return;
+//        }
         if (k == 0) {
             combinations.add(new ArrayList<>(combineList));
             return;
         }
-        for (int i = start; i <= n - k + 1; i++) {  // 剪枝
+        for (int i = start; i <= end; i++) {
             combineList.add(i);
-            backtracking(combineList, combinations, i + 1, k - 1, n);
+            backtracking(combineList, combinations, i + 1, k - 1, end);
             combineList.remove(combineList.size() - 1);
         }
     }
 
-    //集合非空子集 非递归
-    //注意
+
+    /**
+     * 集合非空子集 非递归,没有重复元素的时候使用这个方法
+     *
+     * @param a
+     * @return
+     */
     public List<List<Integer>> getSubsets(int[] a) {
         List<List<Integer>> re = new ArrayList<>();
         if (a == null || a.length == 0) {
@@ -97,5 +115,4 @@ public class QuanPaiLie {
         }
         return list;
     }
-
 }

@@ -60,6 +60,7 @@ public class SomeMethodWithString {
 
     /**
      * 最长不重复子串
+     * leet：3
      * <p>
      * 注意
      */
@@ -94,6 +95,7 @@ public class SomeMethodWithString {
      * (2)插入一个字符；
      * (3)将一个字符改为另一个字符。
      * dp[i][j]它表示第一个字符串的长度为i的子串到第二个字符串的长度为j的子串的最短编辑距离。
+     * leet:72
      */
     public int shortEditLen(String s1, String s2) {
         if (s1 == null && s2 == null) {
@@ -238,6 +240,7 @@ public class SomeMethodWithString {
 
     /**
      * 最长回文子串 aba或abba
+     * leet:5
      */
     public String zuiChangHuiWen(String s) {
         if (s == null || s.length() == 0 || s.length() == 1) {
@@ -267,33 +270,28 @@ public class SomeMethodWithString {
 
     /**
      * 最大连续子序列和问题
+     * leet：42
      */
-    public int maxSum(int[] a) {
-        if (a == null) {
-            return -1;
-        }
-        if (a.length == 0) {
+    public int maxSubArray(int[] nums) {
+        if (nums == null || nums.length == 0) {
             return 0;
         }
-        int curStart = 0, curSum = 0;
-        int maxStart = 0, maxSum = 0, maxEnd = 0;
-        for (int i = 0; i < a.length; i++) {
-            curSum += a[i];
+        int maxSum = Integer.MIN_VALUE, curSum = 0;
+        for (int num : nums) {
+            curSum += num;
             if (curSum > maxSum) {
-                maxStart = curStart;
                 maxSum = curSum;
-                maxEnd = i;
-            } else if (curSum < 0) {
-                curStart = i + 1;
+            }
+            if (curSum < 0) {
                 curSum = 0;
             }
         }
-        System.out.println("起始点为 " + maxStart + "终止点为 " + maxEnd);
         return maxSum;
     }
 
     /**
      * 最长递增连续子序列长度
+     * leet：674
      */
     public int findLengthOfLCIS(int[] a) {
         if (a == null || a.length == 0) {
@@ -305,7 +303,7 @@ public class SomeMethodWithString {
         int max = 1, start = 0, cur = 1, maxStart = 0;
         for (int i = 1; i < a.length; i++) {
             if (a[i] > a[i - 1]) {
-                cur = i - start + 1;
+                cur++;
             } else {
                 start = i;
                 cur = 1;
@@ -320,7 +318,8 @@ public class SomeMethodWithString {
     }
 
     /**
-     * 最长递增子序列
+     * 最长递增子序列,非连续
+     * leet:300
      * 注意
      */
 

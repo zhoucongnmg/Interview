@@ -29,10 +29,10 @@ public class QueueWithTwoStack<T> {
     }
 
     public T poll() {
+        if (s2.isEmpty() && s1.isEmpty()) {
+            return null;
+        }
         if (s2.isEmpty()) {
-            if (s1.isEmpty()) {
-                return null;
-            }
             while (!s1.isEmpty()) {
                 s2.push(s1.pop());
             }

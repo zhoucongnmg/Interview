@@ -127,10 +127,12 @@ public class TwoSum {
             int i = start, j = end;
             while (i < j) {
                 if (a[i] + a[j] == sum) {
-                    cur.add(a[i]);
-                    cur.add(a[j]);
+                    //此处注意，和全排列一样
                     List<Integer> sub = new ArrayList<>(cur);
+                    sub.add(a[i]);
+                    sub.add(a[j]);
                     result.add(sub);
+                    //注意去重
                     i++;
                     j--;
                     while (i < j && a[i] == a[i - 1]) {
@@ -147,6 +149,10 @@ public class TwoSum {
             }
         } else {
             for (int i = start; i <= end - k + 1; i++) {
+                //去重
+                if (i > start && a[i] == a[i-1]) {
+                    continue;
+                }
                 cur.add(a[i]);
                 kSum(a, k - 1, i + 1, end, sum - a[i], cur, result);
                 cur.remove(cur.size() - 1);

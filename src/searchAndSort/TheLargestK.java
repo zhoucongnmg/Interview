@@ -4,7 +4,7 @@ import java.util.PriorityQueue;
 
 /**
  * 查找第k大的数
- *
+ * leet：215
  * @author zc
  */
 public class TheLargestK {
@@ -12,7 +12,7 @@ public class TheLargestK {
     public static void main(String[] args) {
         TheLargestK tk = new TheLargestK();
         int[] a = {1, 2, 3, 3, 3};
-        System.out.println(tk.qSearch(a, 0, a.length - 1, 3));
+//        System.out.println(tk.qSearch(a, 0, a.length - 1, 3));
         int[] b = {7, 8};
         System.out.println(tk.qSearch(b, 0, b.length - 1, 2));
 //        System.out.println(tk.qSearch2(a, 2));
@@ -49,13 +49,15 @@ public class TheLargestK {
     }
 
     public int getPivot(int[] a, int start, int end) {
+        //注意i一定从start开始，不能从start+1开始
         int i = start, j = end;
         int k = a[i];
         while (i < j) {
-            while (i<j && a[j] < k) {
+            //注意一定要有等号
+            while (i<j && a[j] <= k) {
                 j--;
             }
-            while (i<j && a[i] > k) {
+            while (i<j && a[i] >= k) {
                 i++;
             }
             if (i < j) {

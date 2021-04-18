@@ -1,6 +1,5 @@
 package searchAndSort;
 
-import java.util.Arrays;
 import java.util.Stack;
 
 /**
@@ -13,14 +12,18 @@ public class SortMethod {
     public static void main(String[] args) {
         SortMethod sm = new SortMethod();
         Integer[] a = {5, 4, 3, 2, 1, 1};
+//        Integer[] b = {1, 2, 3, 4, 5, 1};
+        Integer[] b = {1, 5, 2, 4, 8, 1};
         String[] s = {"d", "c", "b", "a"};
         Integer[] a1 = {1};
 //		sm.maopaoSort(a);
 //        sm.mergeSort(s, 0, s.length - 1);
-//        sm.quickSort(a, 0, a.length - 1);
-        sm.quickSort(a);
+        sm.quickSort(a, 0, a.length - 1);
+        sm.quickSort(b, 0, a.length - 1);
+//        sm.quickSort(a);
 //        sm.heapSort(a);
         sm.printArray(a);
+        sm.printArray(b);
 //        sm.printArray(a1);
     }
 
@@ -38,6 +41,22 @@ public class SortMethod {
             for (int j = a.length - 1; j > i; j--) {
                 if (a[j].compareTo(a[j - 1]) < 0) {
                     swap(a, j, j - 1);
+                }
+            }
+        }
+    }
+
+    /**
+     * 插入排序
+     * https://blog.csdn.net/qq_28081081/article/details/80594386
+     */
+    public static void sort(int[] a) {
+        for (int i = 1; i < a.length; i++) {
+            for (int j = i; j > 0; j--) {
+                if (a[j] < a[j - 1]) {
+                    int temp = a[j];
+                    a[j] = a[j - 1];
+                    a[j - 1] = temp;
                 }
             }
         }
@@ -87,6 +106,13 @@ public class SortMethod {
         System.arraycopy(temp, 0, a, start, end - start + 1);
     }
 
+    /**
+     * 多写几遍
+     * @param a
+     * @param start
+     * @param end
+     * @param <T>
+     */
     public <T extends Comparable<T>> void quickSort(T[] a, int start, int end) {
         if (a == null || start >= end) {  //注意此处的判断
             return;
@@ -110,8 +136,8 @@ public class SortMethod {
                 swap(a, i, j);
             }
         }
-        swap(a, i, start);
-        return i;
+        swap(a, j, start);
+        return j;
     }
 
     /**
