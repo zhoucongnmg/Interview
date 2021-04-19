@@ -31,6 +31,7 @@ public class FindTreeParent {
 
     /**
      * 二叉查找树
+     * leet:235
      */
     public TreeNode findParent(TreeNode root, TreeNode node1, TreeNode node2) {
         if (root == null) {
@@ -58,11 +59,13 @@ public class FindTreeParent {
     /**
      * 无父节点指针这个问题本质上是找出两个链表中的第一个不同元素。 首先，用树的遍历找出含有这两个子节点的两条路径。两条路径其实两个链表。
      * 然后，找出第一个不同的元素即可。这个元素前面的元素就是相同的元素，也就是第一个公共父节点。
+     * leet：236
      */
     public TreeNode findParent2(TreeNode root, TreeNode node1, TreeNode node2) {
         if (root == null) {
             return null;
         }
+        //注意校验，不存在或者为null，则返回另一个节点
         if (node1 == null) {
             return node2;
         }
@@ -95,6 +98,7 @@ public class FindTreeParent {
         if (root == null) {
             return false;
         }
+        //注意，先放到path里
         path.add(root);
         if (root == node) {
             return true;

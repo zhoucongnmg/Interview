@@ -61,19 +61,20 @@ public class BinarySearchTree {
         if (node == null) {
             return null;
         }
+        if (node.val == value) {
+            if (node.right != null) {
+                //找到右子树的最小节点
+                node.val = findMin(node.right).val;
+                node.right = deleteMin(node.right);
+                return node;
+            } else  {
+                return  node.left;
+            }
+        }
         if (node.val > value) {
             node.left = delete(node.left, value);
-        } else if (node.val < value) {
-            node.right = delete(node.right, value);
-        } else if (node.left != null && node.right != null) {
-            //能走到这说明找到要删除的节点
-            //当有两个孩子时
-            //找到右子树的最小节点
-            node.val = findMin(node.right).val;
-            node.right = deleteMin(node.right);
         } else {
-            //有一个或0个孩子,可以直接用孩子替换该节点
-            node = node.left == null ? node.right : node.left;
+            node.right = delete(node.right, value);
         }
         return node;
     }
@@ -82,10 +83,10 @@ public class BinarySearchTree {
         if (node == null) {
             return null;
         }
-        while (node.left != null) {
-            node = node.left;
+        if (node.left == null) {
+            return node;
         }
-        return node;
+        return findMin(node.left);
     }
 
     //删除以node为根的树中的最小节点，并且返回新根
@@ -93,13 +94,10 @@ public class BinarySearchTree {
         if (node == null) {
             return null;
         }
-        if (node.left != null) {
-            //如果左子树不为空，则删除左子树的最小节点，并将根作为node的左孩子
-            node.left = deleteMin(node.left);
-        } else {
-            //如果左子树为空，则该节点为最小节点，返回树的根为该节点的右孩子
-            node = node.right;
+        if (node.left == null) {
+            return node.right;
         }
+        node.left = deleteMin(node.left);
         return node;
     }
 

@@ -4,6 +4,7 @@ package Tree;
 // 注意
 public class IsSubTree {
     //子结构（可以是树中的一部分呢，不一定非要到达叶节点）
+    //leet：24
     public boolean HasSubtree(TreeNode root1, TreeNode root2) {
         if (root2 == null) {
             return true;
@@ -31,6 +32,7 @@ public class IsSubTree {
     }
 
     //子树，必须到达叶节点
+    //leet：572
     public boolean HasSubtree2(TreeNode root1, TreeNode root2) {
         if (root2 == null) {
             return true;

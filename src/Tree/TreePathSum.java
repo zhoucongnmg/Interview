@@ -23,8 +23,8 @@ public class TreePathSum {
         t2.right = t5;
         TreePathSum tp = new TreePathSum();
         //最长路径
-        tp.getMaxSumPath(t1,0,new ArrayList<>());
-        tp.maxPath.forEach(i-> System.out.println(i.val));
+        tp.getMaxSumPath(t1, 0, new ArrayList<>());
+        tp.maxPath.forEach(i -> System.out.println(i.val));
         System.out.println(tp.maxSum);
         //最长路径长度
         System.out.println(tp.getMaxSum(t1));
@@ -38,6 +38,46 @@ public class TreePathSum {
         }
     }
 
+    private List<List<Integer>> result = new ArrayList<>();
+
+    /**
+     * 二叉树从根节点到叶节点路径上数字之和为一特定数
+     * leet:34
+     *
+     * @param root
+     * @param target
+     * @return
+     */
+    public List<List<Integer>> pathSum(TreeNode root, int target) {
+        if (root == null) {
+            return result;
+        }
+        List<Integer> cur = new ArrayList<>();
+        pathSum(root, target, cur);
+        return result;
+    }
+
+    private void pathSum(TreeNode root, int k, List<Integer> cur) {
+        if (root == null) {
+            return;
+        }
+        cur.add(root.val);
+        if (root.val == k && root.left == null && root.right == null) {
+            result.add(new ArrayList<>(cur));
+        }
+        pathSum(root.left, k - root.val, cur);
+        pathSum(root.right, k - root.val, cur);
+        cur.remove(cur.size() - 1);
+
+    }
+
+    /**
+     * 二叉树从根节点到叶节点路径上数字之和为一特定数,找到一条路径就退出
+     *
+     * @param root
+     * @param sum
+     * @return
+     */
     public List<TreeNode> getPathSumIsK(TreeNode root, int sum) {
         if (root == null) {
             return null;

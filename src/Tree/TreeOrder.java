@@ -47,6 +47,7 @@ public class TreeOrder {
 
     /**
      * 后根遍历
+     * leet:145
      */
     public List<TreeNode> postOrder(TreeNode root) {
         if (root == null) {
@@ -77,6 +78,7 @@ public class TreeOrder {
 
     /**
      * 中序遍历递归
+     * leet:94
      */
     public List<TreeNode> inOrder(TreeNode root) {
         if (root == null) {
@@ -106,6 +108,7 @@ public class TreeOrder {
 
     /**
      * 先根遍历
+     * leet:144
      */
     public List<TreeNode> preOrder(TreeNode root) {
         if (root == null) {
@@ -130,6 +133,7 @@ public class TreeOrder {
 
     /**
      * 层次遍历，非递归
+     * leet:102
      */
     public List<TreeNode> levelOrder(TreeNode root) {
         if (root == null) {
@@ -148,6 +152,37 @@ public class TreeOrder {
             if (temp.right != null) {
                 q.offer(temp.right);
             }
+        }
+        return result;
+    }
+
+    /**
+     * 层次遍历
+     *
+     * @param root
+     * @return
+     */
+    public List<List<Integer>> levelOrder3(TreeNode root) {
+        List<List<Integer>> result = new ArrayList<>();
+        if (root == null) {
+            return result;
+        }
+        List<TreeNode> pre = new ArrayList<>();
+        pre.add(root);
+        while (pre.size() != 0) {
+            List<Integer> curResult = new ArrayList<>();
+            List<TreeNode> cur = new ArrayList<>();
+            for (TreeNode node : pre) {
+                curResult.add(node.val);
+                if (node.left != null) {
+                    cur.add(node.left);
+                }
+                if (node.right != null) {
+                    cur.add(node.right);
+                }
+            }
+            result.add(curResult);
+            pre = cur;
         }
         return result;
     }
@@ -171,26 +206,36 @@ public class TreeOrder {
         levelOrder3(root.right, lists, level + 1);
     }
 
-    // 层次遍历输出偶数层，用上面方法
-    public void levelOrder2(TreeNode root) {
+
+    /**
+     * 锯齿层次遍历
+     * leet：103
+     * @param root
+     * @return
+     */
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        List<List<Integer>> result = new ArrayList<>();
         if (root == null) {
-            return;
+            return result;
         }
+        List<TreeNode> pre = new ArrayList<>();
+        pre.add(root);
         int level = 0;
-        List<TreeNode> cur = new ArrayList<>();
-        List<TreeNode> parent = null;
-        cur.add(root);
-        while (cur.size() > 0) {
+        while(pre.size() > 0) {
             level++;
-            if (level % 2 == 0) {
-                for (TreeNode node : cur) {
-                    System.out.print(node.val + " ");
+            List<Integer> curResult = new ArrayList<>();
+            List<TreeNode> cur = new ArrayList<>();
+            if (level % 2 != 0) {
+                for (int i=0; i<pre.size(); i++) {
+                    curResult.add(pre.get(i).val);
+                }
+            } else {
+                for (int i=pre.size()-1; i>=0; i--) {
+                    curResult.add(pre.get(i).val);
                 }
             }
-
-            parent = cur;
-            cur = new ArrayList<>();
-            for (TreeNode node : parent) {
+            result.add(curResult);
+            for (TreeNode node : pre) {
                 if (node.left != null) {
                     cur.add(node.left);
                 }
@@ -198,7 +243,8 @@ public class TreeOrder {
                     cur.add(node.right);
                 }
             }
-            System.out.println();
+            pre = cur;
         }
+        return result;
     }
 }

@@ -38,6 +38,7 @@ public class ConstrcutTreeFromOrder {
         if (i == -1) {
             return null;
         }
+        //×¢ÒâpostEnd¸³Öµ
         node.left = buildTree(in, instart, i - 1, post, postend - (inend - i + 1));
         node.right = buildTree(in, i + 1, inend, post, postend - 1);
         return node;
