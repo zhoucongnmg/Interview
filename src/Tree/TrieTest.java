@@ -13,7 +13,7 @@ public class TrieTest {
     public static void main(String[] args) {
         String[] a = {"a", "b", "c", "ib"};
         String s = "bibs";
-        TrieNode t = new TrieNode();
+        TrieLevel t = new TrieLevel();
         //后缀树其实是对所有后缀建立trie树
         for (int i = 0; i < s.length(); i++) {
             t.insert(s.substring(i));
@@ -24,20 +24,20 @@ public class TrieTest {
     }
 }
 
-class TrieNode {
+class TrieLevel {
     // 同一层，且拥有相同的父节点的char位于同一个hashmap里
-    Map<Character, TrieNode> map = new HashMap<>();
+    Map<Character, TrieLevel> map = new HashMap<>();
 
     public void insert(String s) {
         if (s == null || s.length() == 0) {
             return;
         }
         char c = s.charAt(0);
-        TrieNode child = null;
+        TrieLevel child = null;
         if (map.containsKey(c)) {
             child = map.get(c);
         } else {
-            child = new TrieNode();
+            child = new TrieLevel();
             map.put(c, child);
         }
         child.insert(s.substring(1));
