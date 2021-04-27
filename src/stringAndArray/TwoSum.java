@@ -85,6 +85,7 @@ public class TwoSum {
                     returnList.add(list);
                     m++;
                     n--;
+                    //注意去重
                     while (m < n && nums[m] == nums[m - 1]) {
                         m++;
                     }

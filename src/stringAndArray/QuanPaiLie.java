@@ -62,25 +62,25 @@ public class QuanPaiLie {
      * @return
      */
     public static List<List<Integer>> combine(int n, int k) {
-        List<List<Integer>> combinations = new ArrayList<>();
-        List<Integer> combineList = new ArrayList<>();
-        backtracking(combineList, combinations, 1, k, n);
-        return combinations;
+        List<List<Integer>> result = new ArrayList<>();
+        List<Integer> curResult = new ArrayList<>();
+        backtracking(curResult, result, 1, k, n);
+        return result;
     }
 
-    private static void backtracking(List<Integer> combineList, List<List<Integer>> combinations, int start, int k, int end) {
-        //注意千万不能带start>end,否则会过滤掉最后一位
+    private static void backtracking(List<Integer> cur, List<List<Integer>> result, int start, int k, int end) {
+        //注意千万不能带start>end,否则会过滤掉最后一位，重新写一下
 //        if (start > end) {
 //            return;
 //        }
         if (k == 0) {
-            combinations.add(new ArrayList<>(combineList));
+            result.add(new ArrayList<>(cur));
             return;
         }
         for (int i = start; i <= end; i++) {
-            combineList.add(i);
-            backtracking(combineList, combinations, i + 1, k - 1, end);
-            combineList.remove(combineList.size() - 1);
+            cur.add(i);
+            backtracking(cur, result, i + 1, k - 1, end);
+            cur.remove(cur.size() - 1);
         }
     }
 

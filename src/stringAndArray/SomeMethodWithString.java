@@ -331,7 +331,7 @@ public class SomeMethodWithString {
         int[] dp = new int[a.length];  //dp[i]表示以a[i]为结尾的最长递增子序列长度
         int len = 0; //表示temp中元素个数
         for (int i = 0; i < a.length; i++) {
-            int j = binarySearch(temp, 0, len-1, a[i]);
+            int j = binarySearch(temp, 0, len - 1, a[i]);
             temp[j] = a[i];
             dp[i] = j + 1;
             if (j + 1 > len) {

@@ -168,7 +168,6 @@ public class SortMethod {
     /**
      * µ›πÈ∂—≈≈–Ú
      */
-
     public <T extends Comparable<T>> void heapSort(T[] a) {
         if (a == null || a.length == 0 || a.length == 1) {
             return;
