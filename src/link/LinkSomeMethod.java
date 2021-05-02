@@ -252,6 +252,28 @@ public class LinkSomeMethod {
     }
 
     /**
+     * 合并k个有序链表
+     * leet：23
+     * @param lists
+     * @return
+     */
+    public LinkNode mergeKLists(LinkNode[] lists) {
+        if (lists == null || lists.length == 0) {
+            return null;
+        }
+        return mergeKLists(lists, 0, lists.length - 1);
+    }
+
+    private LinkNode mergeKLists(LinkNode[] lists, int start, int end) {
+        if (start == end) {
+            return lists[start];
+        }
+        LinkNode h1 = lists[start];
+        LinkNode h2 = mergeKLists(lists, start + 1, end);
+        return mergeTwoLink(h1, h2);
+    }
+
+    /**
      * 单链表排序，要求时间复杂度OnLogn，空间复杂度O1，注意，多次没写上
      * 这个就是单链表归并排序
      *

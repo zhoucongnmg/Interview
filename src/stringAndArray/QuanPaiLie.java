@@ -87,7 +87,7 @@ public class QuanPaiLie {
 
     /**
      * 集合非空子集 非递归,没有重复元素的时候使用这个方法
-     *
+     * 注意
      * @param a
      * @return
      */

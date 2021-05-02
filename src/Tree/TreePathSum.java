@@ -1,7 +1,6 @@
 package Tree;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -22,12 +21,19 @@ public class TreePathSum {
         t2.left = t4;
         t2.right = t5;
         TreePathSum tp = new TreePathSum();
-        //最长路径
-        tp.getMaxSumPath(t1, 0, new ArrayList<>());
-        tp.maxPath.forEach(i -> System.out.println(i.val));
-        System.out.println(tp.maxSum);
         //最长路径长度
-        System.out.println(tp.getMaxSum(t1));
+        TreeNode t7 = new TreeNode(10);
+        TreeNode t8 = new TreeNode(-10);
+        TreeNode t9 = new TreeNode(-7);
+        t7.left = t8;
+        t7.right = t9;
+        System.out.println("最长路径值：" + tp.getMaxSum(t7));
+        //最长路径
+        tp.getMaxSumPath(t7, 0, new ArrayList<>());
+        System.out.println("最长路径：");
+        tp.maxPath.forEach(i -> System.out.println(i.val));
+        System.out.println("最长路径值：" + tp.maxSum);
+
         List<TreeNode> path = tp.getPathSumIsK(t1, 19);
         if (path == null) {
             System.out.println("没有找到相关路径");
@@ -42,7 +48,8 @@ public class TreePathSum {
 
     /**
      * 二叉树从根节点到叶节点路径上数字之和为一特定数
-     * leet:34
+     * 注意
+     * 剑指 Offer 34
      *
      * @param root
      * @param target
@@ -61,10 +68,13 @@ public class TreePathSum {
         if (root == null) {
             return;
         }
-        cur.add(root.val);
         if (root.val == k && root.left == null && root.right == null) {
-            result.add(new ArrayList<>(cur));
+            List<Integer> curResult = new ArrayList<>(cur);
+            curResult.add(root.val);
+            result.add(curResult);
+            return;
         }
+        cur.add(root.val);
         pathSum(root.left, k - root.val, cur);
         pathSum(root.right, k - root.val, cur);
         cur.remove(cur.size() - 1);
@@ -108,7 +118,7 @@ public class TreePathSum {
         return false;
     }
 
-    //最长路径值
+    //最长路径值，从叶节点到根节点
     public int getMaxSum(TreeNode root) {
         if (root == null) {
             return 0;

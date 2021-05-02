@@ -37,7 +37,6 @@ public class TreeOrder {
         // to.levelOrder2(t1);
         System.out.println("层次遍历输出偶数层");
         ArrayList<ArrayList<TreeNode>> arr = new ArrayList<>();
-        to.levelOrder3(t1, arr, 0);
         arr.forEach(i -> {
             i.forEach(j -> System.out.print(j.val));
             System.out.println();
@@ -185,25 +184,6 @@ public class TreeOrder {
             pre = cur;
         }
         return result;
-    }
-
-    // 层次遍历递归
-    // 用这个方法
-    // 注意
-    public void levelOrder3(TreeNode root, ArrayList<ArrayList<TreeNode>> lists, int level) {
-        if (root == null) {
-            return;
-        }
-        ArrayList<TreeNode> list;
-        if (lists.size() == level) {
-            list = new ArrayList<>();
-            lists.add(list);
-        } else {
-            list = lists.get(level);
-        }
-        list.add(root);
-        levelOrder3(root.left, lists, level + 1);
-        levelOrder3(root.right, lists, level + 1);
     }
 
 
