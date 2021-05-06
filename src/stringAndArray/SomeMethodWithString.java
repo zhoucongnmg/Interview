@@ -59,6 +59,34 @@ public class SomeMethodWithString {
     }
 
     /**
+     * 最长递增连续子序列长度
+     * leet：674
+     */
+    public int findLengthOfLCIS(int[] a) {
+        if (a == null || a.length == 0) {
+            return 0;
+        }
+        if (a.length == 1) {
+            return 1;
+        }
+        int max = 1, start = 0, cur = 1, maxStart = 0;
+        for (int i = 1; i < a.length; i++) {
+            if (a[i] > a[i - 1]) {
+                cur++;
+            } else {
+                start = i;
+                cur = 1;
+            }
+            if (cur > max) {
+                max = cur;
+                maxStart = start;
+            }
+        }
+        System.out.println("最长递增连续子序列" + maxStart);
+        return max;
+    }
+
+    /**
      * 最长不重复子串
      * leet：3
      * <p>
@@ -290,39 +318,10 @@ public class SomeMethodWithString {
     }
 
     /**
-     * 最长递增连续子序列长度
-     * leet：674
-     */
-    public int findLengthOfLCIS(int[] a) {
-        if (a == null || a.length == 0) {
-            return 0;
-        }
-        if (a.length == 1) {
-            return 1;
-        }
-        int max = 1, start = 0, cur = 1, maxStart = 0;
-        for (int i = 1; i < a.length; i++) {
-            if (a[i] > a[i - 1]) {
-                cur++;
-            } else {
-                start = i;
-                cur = 1;
-            }
-            if (cur > max) {
-                max = cur;
-                maxStart = start;
-            }
-        }
-        System.out.println("最长递增连续子序列" + maxStart);
-        return max;
-    }
-
-    /**
      * 最长递增子序列,非连续
      * leet:300
      * 注意
      */
-
     public List<Integer> longestIncreaseSub(int[] a) {
         if (a == null || a.length == 0) {
             return null;
@@ -338,7 +337,6 @@ public class SomeMethodWithString {
                 len = j + 1;
             }
         }
-
         return getResult(a, dp, len);
     }
 

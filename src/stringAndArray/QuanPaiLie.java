@@ -15,7 +15,7 @@ public class QuanPaiLie {
         List<Character> cur = new ArrayList<>();
         qpl.quanPaiLie(c, 0, 2, cur);
         System.out.println(result);
-        System.out.println(combine(4,2));
+        System.out.println(combine(4, 2));
     }
 
 
@@ -58,10 +58,14 @@ public class QuanPaiLie {
     /**
      * leecode：77. 组合
      * 注意
+     *
      * @param
      * @return
      */
     public static List<List<Integer>> combine(int n, int k) {
+        if (k > n) {
+            return null;
+        }
         List<List<Integer>> result = new ArrayList<>();
         List<Integer> curResult = new ArrayList<>();
         backtracking(curResult, result, 1, k, n);
@@ -77,7 +81,7 @@ public class QuanPaiLie {
             result.add(new ArrayList<>(cur));
             return;
         }
-        for (int i = start; i <= end; i++) {
+        for (int i = start; i <= end - k + 1; i++) {
             cur.add(i);
             backtracking(cur, result, i + 1, k - 1, end);
             cur.remove(cur.size() - 1);
@@ -88,6 +92,7 @@ public class QuanPaiLie {
     /**
      * 集合非空子集 非递归,没有重复元素的时候使用这个方法
      * 注意
+     *
      * @param a
      * @return
      */
