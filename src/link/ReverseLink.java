@@ -110,11 +110,9 @@ public class ReverseLink {
         if (head == null || head.next == null || k < 2) {
             return head;
         }
-        LinkNode jHead = new LinkNode(0), jTail = jHead, oHead = new LinkNode(0), oTail = oHead, cur = head, temp = null;
+        LinkNode jHead = new LinkNode(0), jTail = jHead, oHead = new LinkNode(0), oTail = oHead, cur = head;
         int i = 1;
         while (cur != null) {
-            temp = cur.next;
-            cur.next = null;
             if (i % 2 == 0) {
                 oTail.next = cur;
                 oTail = oTail.next;
@@ -122,9 +120,12 @@ public class ReverseLink {
                 jTail.next = cur;
                 jTail = jTail.next;
             }
-            cur = temp;
+            cur = cur.next;
             i++;
         }
+        //链表一变多，需要将生成的链表尾的next置空
+        jTail.next = null;
+        oTail.next = null;
         LinkNode newHead = new LinkNode(0);
         cur = newHead;
         jTail = jHead.next;
@@ -170,7 +171,7 @@ public class ReverseLink {
     }
 
     private LinkNode reverse(LinkNode head, LinkNode tail) {
-        LinkNode pre = head, cur = head.next, temp = null;
+        LinkNode pre = head, cur = head.next, temp;
         pre.next = null;
         while (cur != tail) {
             temp = cur.next;
