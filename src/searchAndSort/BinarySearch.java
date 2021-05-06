@@ -73,7 +73,6 @@ public class BinarySearch {
      * @param k
      * @return
      */
-
     public int findByRule(int[] a, int start, int end, int k) {
         if (a == null) {
             return -1;
@@ -109,6 +108,5 @@ public class BinarySearch {
         } else {
             return findByRule2(a, mid + 1, end, k);
         }
-
     }
 }

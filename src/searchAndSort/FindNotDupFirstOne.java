@@ -22,7 +22,7 @@ public class FindNotDupFirstOne {
         if (a == null || a.length == 0) {
             return null;
         }
-        Map<Character, Boolean> map = new HashMap<>();
+        Map<Character, Boolean> map = new HashMap<>(16);
         for (char c : a) {
             if (map.containsKey(c)) {
                 map.put(c, true);

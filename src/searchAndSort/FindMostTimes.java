@@ -40,6 +40,5 @@ public class FindMostTimes {
             }
         }
         return max;
-
     }
 }
