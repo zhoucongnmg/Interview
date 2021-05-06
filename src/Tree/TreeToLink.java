@@ -31,19 +31,19 @@ public class TreeToLink {
         if (root.left == null && root.right == null) {
             return root;
         }
-        TreeNode newHead = null;
-        if (root.left != null) {
-            newHead = treeToDoublyList(root.left);
-            TreeNode leftT = getTail(newHead);
-            leftT.right = root;
-            root.left = leftT;
-        }
         if (root.right != null) {
             TreeNode rightH = treeToDoublyList(root.right);
             root.right = rightH;
             rightH.left = root;
         }
-        return newHead == null ? root : newHead;
+        if (root.left == null) {
+            return root;
+        }
+        TreeNode leftH = treeToDoublyList(root.left);
+        TreeNode leftT = getTail(leftH);
+        leftT.right = root;
+        root.left = leftT;
+        return leftH;
     }
 
     private TreeNode getTail(TreeNode head) {

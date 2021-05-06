@@ -3,7 +3,7 @@ package link;
 /**
  * @author zhoucong
  * @time 2018/6/23
- * 一个有序单链表，头尾衔接成环，在不改变大小顺序的情况下一个新数字
+ * 一个有序单链表，头尾衔接成环，在不改变大小顺序的情况下一个新数字，注意
  */
 public class LinkNodeInsert {
     public static void main(String[] args) {

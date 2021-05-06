@@ -188,8 +188,9 @@ public class TreeOrder {
 
 
     /**
-     * 锯齿层次遍历
+     * 锯齿层次遍历，蛇形遍历
      * leet：103
+     *
      * @param root
      * @return
      */
@@ -201,16 +202,16 @@ public class TreeOrder {
         List<TreeNode> pre = new ArrayList<>();
         pre.add(root);
         int level = 0;
-        while(pre.size() > 0) {
+        while (pre.size() > 0) {
             level++;
             List<Integer> curResult = new ArrayList<>();
             List<TreeNode> cur = new ArrayList<>();
             if (level % 2 != 0) {
-                for (int i=0; i<pre.size(); i++) {
+                for (int i = 0; i < pre.size(); i++) {
                     curResult.add(pre.get(i).val);
                 }
             } else {
-                for (int i=pre.size()-1; i>=0; i--) {
+                for (int i = pre.size() - 1; i >= 0; i--) {
                     curResult.add(pre.get(i).val);
                 }
             }

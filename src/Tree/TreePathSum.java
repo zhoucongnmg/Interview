@@ -68,6 +68,7 @@ public class TreePathSum {
         if (root == null) {
             return;
         }
+        //此处注意，找所有路径，一定要把出口放在cur.add的前面，否则会导致已经加入的无法删除
         if (root.val == k && root.left == null && root.right == null) {
             List<Integer> curResult = new ArrayList<>(cur);
             curResult.add(root.val);
@@ -118,7 +119,7 @@ public class TreePathSum {
         return false;
     }
 
-    //最长路径值，从叶节点到根节点
+    //最长路径值，从叶节点到根节点，注意
     public int getMaxSum(TreeNode root) {
         if (root == null) {
             return 0;

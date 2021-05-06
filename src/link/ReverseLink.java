@@ -1,5 +1,7 @@
 package link;
 
+import static link.LinkSomeMethod.getLen;
+
 /**
  * 反转链表
  *
@@ -99,5 +101,117 @@ public class ReverseLink {
         l.next.next = cur;
         l.next = pre;
         return h.next;
+    }
+
+    /**
+     * 两个一组翻转链表
+     */
+    public LinkNode reverseKGroup2(LinkNode head, int k) {
+        if (head == null || head.next == null || k < 2) {
+            return head;
+        }
+        LinkNode jHead = new LinkNode(0), jTail = jHead, oHead = new LinkNode(0), oTail = oHead, cur = head, temp = null;
+        int i = 1;
+        while (cur != null) {
+            temp = cur.next;
+            cur.next = null;
+            if (i % 2 == 0) {
+                oTail.next = cur;
+                oTail = oTail.next;
+            } else {
+                jTail.next = cur;
+                jTail = jTail.next;
+            }
+            cur = temp;
+            i++;
+        }
+        LinkNode newHead = new LinkNode(0);
+        cur = newHead;
+        jTail = jHead.next;
+        oTail = oHead.next;
+        while (jTail != null && oTail != null) {
+            cur.next = oTail;
+            oTail = oTail.next;
+            cur = cur.next;
+            cur.next = jTail;
+            jTail = jTail.next;
+            cur = cur.next;
+        }
+        if (jTail != null) {
+            cur.next = jTail;
+        }
+        if (oTail != null) {
+            cur.next = oTail;
+        }
+        return newHead.next;
+
+    }
+
+    /**
+     * k个一组翻转链表
+     * leet：25
+     */
+    public LinkNode reverseKGroup(LinkNode head, int k) {
+        if (head == null || head.next == null || k < 2) {
+            return head;
+        }
+        int temp = k;
+        LinkNode cur = head;
+        while (cur != null && temp > 0) {
+            cur = cur.next;
+            temp--;
+        }
+        if (temp > 0) {
+            return head;
+        }
+        LinkNode newHead = reverse(head, cur);
+        head.next = reverseKGroup(cur, k);
+        return newHead;
+    }
+
+    private LinkNode reverse(LinkNode head, LinkNode tail) {
+        LinkNode pre = head, cur = head.next, temp = null;
+        pre.next = null;
+        while (cur != tail) {
+            temp = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = temp;
+        }
+        return pre;
+    }
+
+    /**
+     * 链表右移k位
+     * leet：61
+     *
+     * @param head
+     * @param k
+     * @return
+     */
+    public LinkNode rotateRight(LinkNode head, int k) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        int len = getLen(head, null);
+        k = k % len;
+        //注意为0时的情况
+        if (k == 0) {
+            return head;
+        }
+
+        LinkNode fast = head, slow = head;
+        while (k > 0) {
+            fast = fast.next;
+            k--;
+        }
+        while (fast.next != null) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+        LinkNode newHead = slow.next;
+        slow.next = null;
+        fast.next = head;
+        return newHead;
     }
 }

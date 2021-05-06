@@ -6,6 +6,23 @@ package link;
  */
 public class DeleteDupInLinkList {
 
+    public static void main(String[] args) {
+        DeleteDupInLinkList remove = new DeleteDupInLinkList();
+        LinkNode l10 = new LinkNode(1);
+        LinkNode l11 = new LinkNode(1);
+        LinkNode l12 = new LinkNode(5);
+        LinkNode l13 = new LinkNode(2);
+        LinkNode l14 = new LinkNode(4);
+        LinkNode l15 = new LinkNode(1);
+        l10.next = l11;
+        l11.next = l12;
+        l12.next = l13;
+        l13.next = l14;
+        l14.next = l15;
+        LinkNode node = remove.deleteNode(l10, 1);
+        System.out.println(node);
+    }
+
     //leet 83
     //Given 1->1->2->3->3, return 1->2->3.
     public LinkNode deleteDuplicates(LinkNode head) {
@@ -48,5 +65,33 @@ public class DeleteDupInLinkList {
             }
         }
         return h.next;
+    }
+
+    /**
+     * 删除链表中的节点
+     * 注意：1->2->6->3->4->5->6
+     *
+     * @param head
+     */
+
+    public LinkNode deleteNode(LinkNode head, int val) {
+        if (head == null) {
+            return null;
+        }
+        LinkNode newHead = new LinkNode(0), pre = newHead;
+        newHead.next = head;
+        LinkNode cur = head;
+        while (cur != null) {
+            //此处注意，等于val的一直跳过
+            while (cur != null && cur.val == val) {
+                cur = cur.next;
+            }
+            pre.next = cur;
+            pre = pre.next;
+            if (cur != null) {
+                cur = cur.next;
+            }
+        }
+        return newHead.next;
     }
 }

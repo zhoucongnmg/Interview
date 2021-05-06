@@ -46,8 +46,6 @@ public class LinkSomeMethod {
         l13.next = l14;
         System.out.println("合并两个有序链表的结果为");
         ls.printLink(ls.mergeTwoLink(l10, l13));
-        System.out.println("删除节点后");
-        ls.printLink(ls.deleteNode(l10, 1));
     }
 
     /**
@@ -82,10 +80,7 @@ public class LinkSomeMethod {
             return null;
         }
         LinkNode node1 = head, node2 = k;
-        while (true) {
-            if (node1 == node2) {
-                break;
-            }
+        while (node1 != node2) {
             node1 = node1.next;
             node2 = node2.next;
         }
@@ -166,7 +161,7 @@ public class LinkSomeMethod {
     /**
      * 获取链表长度
      */
-    public int getLen(LinkNode head, LinkNode end) {
+    public static int getLen(LinkNode head, LinkNode end) {
         if (head == null) {
             return 0;
         }
@@ -180,7 +175,7 @@ public class LinkSomeMethod {
 
     /**
      * 找链表倒数第k个节点
-     * 	剑指 Offer 22
+     * 剑指 Offer 22
      */
     public LinkNode findLaskKNode(LinkNode head, int k) {
         if (head == null || k <= 0) {
@@ -200,6 +195,32 @@ public class LinkSomeMethod {
         }
         return slow;
     }
+
+    /**
+     * 删除链表的倒数第k位
+     * leet：19
+     */
+    public LinkNode removeNthFromEnd(LinkNode head, int k) {
+        if (head == null) {
+            return null;
+        }
+        LinkNode newHead = new LinkNode(0), fast = newHead, slow = newHead;
+        newHead.next = head;
+        while (k > 0 && fast != null) {
+            fast = fast.next;
+            k--;
+        }
+        if (fast == null) {
+            return head;
+        }
+        while (fast.next != null) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+        slow.next = slow.next.next;
+        return newHead.next;
+    }
+
 
     /**
      * 合并两个有序链表，非递归实现
@@ -254,6 +275,7 @@ public class LinkSomeMethod {
     /**
      * 合并k个有序链表
      * leet：23
+     *
      * @param lists
      * @return
      */
@@ -283,16 +305,16 @@ public class LinkSomeMethod {
         if (head == null || head.next == null) {
             return head;
         }
-        LinkNode fast = head, slow = head, pre = head;
+        LinkNode fast = head.next, slow = head;
         while (fast != null && fast.next != null) {
-            pre = slow;
             fast = fast.next.next;
             slow = slow.next;
         }
-        pre.next = null;
+        LinkNode temp = slow.next;
+        slow.next = null;
 
         LinkNode l1 = mergeSort(head);
-        LinkNode l2 = mergeSort(slow);
+        LinkNode l2 = mergeSort(temp);
 
         return mergeTwoLink(l1, l2);
     }
@@ -332,8 +354,6 @@ public class LinkSomeMethod {
         }
         leftLast.next = pivot;
         return left;
-
-
     }
 
     /**
@@ -388,31 +408,6 @@ public class LinkSomeMethod {
         return cur;
     }
 
-    /**
-     * 删除链表中的节点
-     * 注意：1->2->6->3->4->5->6
-     *
-     * @param head
-     */
-
-    public LinkNode deleteNode(LinkNode head, int val) {
-        if (head == null) {
-            return null;
-        }
-        LinkNode l = new LinkNode(0), pre = l;
-        l.next = head;
-        LinkNode cur = head;
-        while (cur != null) {
-            if (cur.val == val) {
-                pre.next = cur.next;
-            } else {
-                pre = pre.next;
-            }
-            cur = cur.next;
-        }
-        return l.next;
-    }
-
     // 打印链表
     public void printLink(LinkNode head) {
         while (head != null) {
@@ -420,6 +415,63 @@ public class LinkSomeMethod {
             head = head.next;
         }
         System.out.println();
+    }
+
+    /**
+     * 奇偶链表
+     * 下面是空间复杂度o（1），简单的做法是在开两条链，把两条链组在一起
+     * leet：328
+     */
+    public LinkNode oddEvenList(LinkNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        LinkNode jTail = head, cur = head.next, temp = null, oTail = head.next;
+        int i = 2;
+        while (cur != null) {
+            if (i % 2 != 0) {
+                temp = cur.next;
+                cur.next = jTail.next;
+                jTail.next = cur;
+                jTail = jTail.next;
+                oTail.next = temp;
+                oTail = oTail.next;
+                cur = temp;
+            } else {
+                cur = cur.next;
+            }
+            i++;
+        }
+        return head;
+    }
+
+    /**
+     * 奇偶链表
+     * 简单的做法是在开两条链，把两条链组在一起
+     * leet：328
+     */
+    public LinkNode oddEvenList2(LinkNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        LinkNode j = new LinkNode(0), jTail = j, o = new LinkNode(0), oTail = o, cur = head, temp = null;
+        int i = 1;
+        while (cur != null) {
+            //依据原链表开新链的时候，需要注意把原来节点的next置空
+            if (i % 2 == 0) {
+                oTail.next = cur;
+                oTail = oTail.next;
+            } else {
+                jTail.next = cur;
+                jTail = jTail.next;
+            }
+            cur = cur.next;
+            i++;
+        }
+        //一条链分成两条需要，需要在把两条链的末尾断开
+        oTail.next = null;
+        jTail.next = o.next;
+        return j.next;
     }
 
 }

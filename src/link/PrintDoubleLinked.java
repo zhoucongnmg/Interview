@@ -2,6 +2,9 @@ package link;
 
 import Tree.TreeNode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 给定任意双向链表，按从小到大顺序输出。要求时间复杂度O(nlogn)，空间复杂度O(1)
  * 多次不会
@@ -111,5 +114,39 @@ public class PrintDoubleLinked {
         }
 
         return left == null ? root : left;
+    }
+
+    /**
+     * 有序链表转平衡二叉搜索树
+     * leet:109
+     *
+     * @param head
+     * @return
+     */
+    public TreeNode sortedListToBST(LinkNode head) {
+        if (head == null) {
+            return null;
+        }
+        List<Integer> linkNodeList = new ArrayList<>();
+        LinkNode cur = head;
+        while (cur != null) {
+            linkNodeList.add(cur.val);
+            cur = cur.next;
+        }
+        return sortedListToBST(linkNodeList, 0, linkNodeList.size() - 1);
+    }
+
+    private TreeNode sortedListToBST(List<Integer> linkNodeList, int start, int end) {
+        if (start > end) {
+            return null;
+        }
+        if (start == end) {
+            return new TreeNode(linkNodeList.get(start));
+        }
+        int mid = start + (end - start) / 2;
+        TreeNode root = new TreeNode(linkNodeList.get(mid));
+        root.left = sortedListToBST(linkNodeList, start, mid - 1);
+        root.right = sortedListToBST(linkNodeList, mid + 1, end);
+        return root;
     }
 }
