@@ -54,7 +54,8 @@ public class StackWithTwoQueue<T> {
         return popQ.poll();
     }
 
-    public T peek(){
+    //×¢Òâpeek·½·¨
+    public T peek() {
         return top;
     }
 }
