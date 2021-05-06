@@ -30,11 +30,7 @@ public class LRU {
 
         @Override
         public boolean removeEldestEntry(Map.Entry<K, V> entry) {
-            if (size() > capacity) {
-                return true;
-            } else {
-                return false;
-            }
+            return size() > capacity;
         }
     }
 }
