@@ -15,12 +15,12 @@ public class YueSeFuHuan {
 
     /**
      * @param n 总人数为n
-     * @param m 步长为m
+     * @param k 步长为m
      * https://www.jianshu.com/p/6ee5c7b21333
      * @return
      */
-    public int method(int n, int m) {
-        if (m < 1) {
+    public int method(int n, int k) {
+        if (k < 1) {
             return -1;
         }
         if (n == 1) {
@@ -29,7 +29,7 @@ public class YueSeFuHuan {
         //算的时候都当第一个人为0算，返回结果时再将其加1
         int[] dp = new int[n + 1];
         for (int i = 2; i <= n; i++) {
-            dp[i] = (dp[i - 1] + m) % i;
+            dp[i] = (dp[i - 1] + k) % i;
         }
         return dp[n] + 1;
     }
