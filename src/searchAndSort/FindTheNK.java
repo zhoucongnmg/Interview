@@ -34,8 +34,6 @@ public class FindTheNK {
         return -1;
     }
 
-    //找到k的最左边位置
-
     /**
      * 找一个值在有序数组中第一次出现的位置
      *

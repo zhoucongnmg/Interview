@@ -108,13 +108,15 @@ public class SortMethod {
 
     /**
      * 多写几遍
+     *
      * @param a
      * @param start
      * @param end
      * @param <T>
      */
     public <T extends Comparable<T>> void quickSort(T[] a, int start, int end) {
-        if (a == null || start >= end) {  //注意此处的判断
+        //注意此处的判断
+        if (a == null || start >= end) {
             return;
         }
         int pivot = getPivot(a, start, end);
