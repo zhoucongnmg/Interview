@@ -34,6 +34,7 @@ public class Bag {
         for (int i : nums) {
             sum += i;
         }
+        //зЂвт
         if (sum % 2 != 0) {
             return false;
         }
@@ -42,6 +43,7 @@ public class Bag {
     }
 
     private boolean canPartition(int[] nums, int start, int end, int sum, List<Integer> cur) {
+        //зЂвт
         if (sum == 0) {
             return true;
         }

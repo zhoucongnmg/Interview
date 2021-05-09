@@ -358,6 +358,7 @@ public class LinkSomeMethod {
 
     /**
      * 单链表插入排序
+     * 注意
      */
     public LinkNode insertionSortList(LinkNode head) {
         if (head == null || head.next == null) {

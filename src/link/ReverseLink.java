@@ -50,7 +50,6 @@ public class ReverseLink {
             pre = cur;
             cur = temp;
         }
-        //注意此处返回pre
         return pre;
     }
 
@@ -104,7 +103,7 @@ public class ReverseLink {
     }
 
     /**
-     * 两个一组翻转链表
+     * 两个一组翻转链表，这种方法是先拆链，思路简单但是写起来会更复杂
      */
     public LinkNode reverseKGroup2(LinkNode head, int k) {
         if (head == null || head.next == null || k < 2) {

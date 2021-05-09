@@ -61,9 +61,11 @@ public class DfsAndBfs {
         boolean[][] marked = new boolean[a.length][a[0].length];
         for (int i = 0; i < a.length; i++) {
             for (int j = 0; j < a[0].length; j++) {
-                int current = dfsMaxArea(a, marked, i, j);
-                if (current > maxArea) {
-                    maxArea = current;
+                if (marked[i][j] == false && a[i][j] == 1) {
+                    int current = dfsMaxArea(a, marked, i, j);
+                    if (current > maxArea) {
+                        maxArea = current;
+                    }
                 }
             }
         }
@@ -101,8 +103,10 @@ public class DfsAndBfs {
         boolean[][] marked = new boolean[a.length][a[0].length];
         for (int i = 0; i < a.length; i++) {
             for (int j = 0; j < a[0].length; j++) {
-                if (pathDfs(a, i, j, path, 0, marked)) {
-                    return true;
+                if (a[i][j] == path.charAt(0) && marked[i][j] == false) {
+                    if (pathDfs(a, i, j, path, 0, marked)) {
+                        return true;
+                    }
                 }
             }
         }
@@ -110,26 +114,24 @@ public class DfsAndBfs {
     }
 
     private boolean pathDfs(char[][] a, int i, int j, String word, int index, boolean[][] marked) {
-        if (i < 0 || i >= a.length || j < 0 || j >= a[0].length || marked[i][j]) {
+        if (i < 0 || i >= a.length || j < 0 || j >= a[0].length || marked[i][j] || word.charAt(index) != a[i][j]) {
             return false;
         }
-        if (index == word.length()-1 && word.charAt(index) == a[i][j]) {
+        //走到这说明word.charAt(index) == a[i][j]成立
+        if (index == word.length() - 1) {
             return true;
-        }
-        if (word.charAt(index) != a[i][j]) {
-            return false;
         }
         marked[i][j] = true;
-        if (pathDfs(a, i-1, j, word, index+1, marked)) {
+        if (pathDfs(a, i - 1, j, word, index + 1, marked)) {
             return true;
         }
-        if (pathDfs(a, i+1, j, word, index+1, marked)) {
+        if (pathDfs(a, i + 1, j, word, index + 1, marked)) {
             return true;
         }
-        if (pathDfs(a, i, j-1, word, index+1, marked)) {
+        if (pathDfs(a, i, j - 1, word, index + 1, marked)) {
             return true;
         }
-        if (pathDfs(a, i, j+1, word, index+1, marked)) {
+        if (pathDfs(a, i, j + 1, word, index + 1, marked)) {
             return true;
         }
         //注意回溯

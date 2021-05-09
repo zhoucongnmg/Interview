@@ -1,5 +1,7 @@
 package searchAndSort;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 /**
@@ -18,10 +20,12 @@ public class SortMethod {
         Integer[] a1 = {1};
 //		sm.maopaoSort(a);
 //        sm.mergeSort(s, 0, s.length - 1);
-        sm.quickSort(a, 0, a.length - 1);
-        sm.quickSort(b, 0, a.length - 1);
+//        sm.quickSort(a, 0, a.length - 1);
+//        sm.quickSort(b, 0, a.length - 1);
 //        sm.quickSort(a);
 //        sm.heapSort(a);
+        sm.radixSort(a);
+        sm.radixSort(b);
         sm.printArray(a);
         sm.printArray(b);
 //        sm.printArray(a1);
@@ -125,20 +129,19 @@ public class SortMethod {
     }
 
     public <T extends Comparable<T>> int getPivot(T[] a, int start, int end) {
-        T k = a[start];
-        int i = start, j = end;
+        int i = start, j = end, pivot = start;
         while (i < j) {
-            while (i < j && a[j].compareTo(k) >= 0) {
+            while (i < j && a[j].compareTo(a[pivot]) >= 0) {
                 j--;
             }
-            while (i < j && a[i].compareTo(k) <= 0) {
+            while (i < j && a[i].compareTo(a[pivot]) <= 0) {
                 i++;
             }
             if (i < j) {
                 swap(a, i, j);
             }
         }
-        swap(a, j, start);
+        swap(a, j, pivot);
         return j;
     }
 
@@ -197,6 +200,50 @@ public class SortMethod {
             swap(a, child, foo);
             buildHeap(a, child, end);
         }
+    }
+
+    /**
+     * »ùÊýÅÅÐò
+     *
+     * @param a
+     */
+    public void radixSort(Integer[] a) {
+        if (a == null || a.length < 2) {
+            return;
+        }
+        int len = getMaxLen(a);
+        for (int i = 0; i < len; i++) {
+            radixSort(a, i);
+        }
+    }
+
+    private void radixSort(Integer[] a, int i) {
+        int pow = (int) Math.pow(10, i);
+        List<List<Integer>> buckets = new ArrayList<>();
+        for (int j = 0; j < 10; j++) {
+            buckets.add(new ArrayList<>());
+        }
+        for (int num : a) {
+            int index = num / pow % 10;
+            buckets.get(index).add(num);
+        }
+        int index = 0;
+        for (List<Integer> list : buckets) {
+            for (int num : list) {
+                a[index++] = num;
+            }
+        }
+    }
+
+    private int getMaxLen(Integer[] a) {
+        int maxLen = 0;
+        for (int i : a) {
+            String s = String.valueOf(i);
+            if (s.length() > maxLen) {
+                maxLen = s.length();
+            }
+        }
+        return maxLen;
     }
 
     //½»»»

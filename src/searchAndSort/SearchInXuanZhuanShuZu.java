@@ -22,9 +22,9 @@ public class SearchInXuanZhuanShuZu {
         int[] g1 = {1, 2, 3, 4};
         int[] g2 = {4, 3, 2, 1};
         SearchInXuanZhuanShuZu s = new SearchInXuanZhuanShuZu();
-//        System.out.println(s.findPartMin(g));
-//        System.out.println(s.findPartMin(g1));
-//        System.out.println(s.findPartMin(g2));
+        System.out.println(s.findPartMin(g));
+        System.out.println(s.findPartMin(g1));
+        System.out.println(s.findPartMin(g2));
         System.out.println(s.findMin(a, 0, a.length - 1));
 //        System.out.println(s.findMax(b, 0, b.length - 1));
 //        System.out.println(s.findMax(c, 0, c.length - 1));
@@ -156,11 +156,9 @@ public class SearchInXuanZhuanShuZu {
         if (start == end) {
             return start;
         }
-        if (a[start] < a[start + 1]) {
-            return start;
-        }
-        if (a[end] < a[end - 1]) {
-            return end;
+        //只有两位时候不用二分
+        if (end - start == 1) {
+            return a[start] < a[end] ? start : end;
         }
         int mid = start + (end - start) / 2;
         if (a[mid] < a[mid - 1] && a[mid] < a[mid + 1]) {
