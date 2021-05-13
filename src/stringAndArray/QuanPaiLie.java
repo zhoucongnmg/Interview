@@ -81,6 +81,9 @@ public class QuanPaiLie {
             result.add(new ArrayList<>(cur));
             return;
         }
+        if (start > end) {
+            return;
+        }
         for (int i = start; i <= end - k + 1; i++) {
             cur.add(i);
             backtracking(cur, result, i + 1, k - 1, end);
