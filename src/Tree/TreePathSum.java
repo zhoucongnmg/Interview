@@ -128,7 +128,9 @@ public class TreePathSum {
     }
 
 
-    //最长路径
+    /**
+     * 最长路径 注意
+     */
     int maxSum = Integer.MIN_VALUE;
     List<TreeNode> maxPath;
 
