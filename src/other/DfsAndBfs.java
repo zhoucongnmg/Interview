@@ -8,6 +8,12 @@ import java.util.Queue;
  */
 public class DfsAndBfs {
 
+    public static void main(String[] args) {
+        DfsAndBfs dfsAndBfs = new DfsAndBfs();
+        int[][] a = new int[][]{{1, 2, 3}, {4, 5, 6}};
+        System.out.println(dfsAndBfs.maxLen(a));
+    }
+
     /**
      * leetcode :200
      * 给一个01矩阵，求不同的岛屿的个数。
@@ -47,6 +53,49 @@ public class DfsAndBfs {
         if (j + 1 < a[0].length && a[i][j + 1] == 1) {
             dfs(a, i, j + 1);
         }
+    }
+
+    /**
+     * 最大长度，只能往比他大的地方走
+     */
+    public int maxLen(int[][] a) {
+        if (a == null || a.length == 0 || a[0] == null || a[0].length == 0) {
+            return 0;
+        }
+        boolean[][] marked = new boolean[a.length][a[0].length];
+        int max = 0;
+        int cur = 0;
+        for (int i = 0; i < a.length; i++) {
+            for (int j = 0; j < a[0].length; j++) {
+                cur = dfs(a, i, j, marked);
+                if (cur > max) {
+                    max = cur;
+                }
+            }
+        }
+        return max;
+    }
+
+    public int dfs(int[][] a, int i, int j, boolean[][] marked) {
+        if (i < 0 || j < 0 || i >= a.length || j >= a[0].length || marked[i][j] == true) {
+            return 0;
+        }
+        marked[i][j] = true;
+        int a1 = 1, a2 = 1, a3 = 1, a4 = 1;
+        if (i + 1 < a.length && a[i + 1][j] > a[i][j]) {
+            a1 += dfs(a, i + 1, j, marked);
+        }
+        if (i - 1 >= 0 && a[i - 1][j] > a[i][j]) {
+            a2 += dfs(a, i - 1, j, marked);
+        }
+        if (j + 1 < a[0].length && a[i][j + 1] > a[i][j]) {
+            a3 += dfs(a, i, j + 1, marked);
+        }
+        if (j - 1 >= 0 && a[i][j - 1] > a[i][j]) {
+            a4 += dfs(a, i, j - 1, marked);
+        }
+        marked[i][j] = false;
+        return Math.max(a1, Math.max(a2, Math.max(a3, a4)));
     }
 
     /**
