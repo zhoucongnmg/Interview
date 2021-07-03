@@ -16,6 +16,10 @@ public class Recursion {
         System.out.println(jumpResult);
         rank(0, 0, 5, 5, new ArrayList<>());
         System.out.println(rankResult);
+
+        Recursion recursion = new Recursion();
+        List<List<Integer>> result = recursion.ipSplit("1233405");
+        System.out.println(result);
     }
 
     //青蛙跳台阶打印所有路径
@@ -56,5 +60,52 @@ public class Recursion {
         list.add(0);
         rank(boy, girl + 1, boyLimit, girlLimit, list);
         list.remove(list.size() - 1);
+    }
+
+
+    /**
+     * 一个string，可以分割成多少个合理的ip地址
+     */
+    List<List<Integer>> result = new ArrayList<>();
+
+    public List<List<Integer>> ipSplit(String s) {
+        if (s == null || s.length() == 0) {
+            return null;
+        }
+        List<Integer> curResult = new ArrayList<>();
+        ipSplit(s, 0, s.length() - 1, 4, curResult);
+        return result;
+    }
+
+    public void ipSplit(String s, int start, int end, int k, List<Integer> curResult) {
+        //注意边界条件
+        if (k == 0 && start > end) {
+            result.add(new ArrayList<>(curResult));
+            return;
+        }
+        if (start > end || k < 0) {
+            return;
+        }
+        StringBuilder builder = new StringBuilder();
+        for (int i = start; i <= end; i++) {
+            builder.append(s.charAt(i));
+            if (isIpv4Item(builder)) {
+                curResult.add(Integer.valueOf(builder.toString()));
+                ipSplit(s, i + 1, end, k - 1, curResult);
+                curResult.remove(curResult.size() - 1);
+            }
+        }
+    }
+
+    public boolean isIpv4Item(StringBuilder builder) {
+        String s = builder.toString();
+        if (s.startsWith("0") && s.length() > 1) {
+            return false;
+        }
+        int i = Integer.valueOf(s);
+        if (i >= 0 && i <= 255) {
+            return true;
+        }
+        return false;
     }
 }
