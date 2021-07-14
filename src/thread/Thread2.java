@@ -16,7 +16,7 @@ public class Thread2 {
     private static Lock lock = new ReentrantLock();
     private static Condition condition = lock.newCondition();
 
-    private static int numIndex= 1;
+    private static int numIndex = 1;
     private static int charIndex = 0;
 
     public static void main(String[] args) {
@@ -50,7 +50,8 @@ public class Thread2 {
             }
         });
 
-        char[] charArray = new char[]{'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+        char[] charArray = new char[]{'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
+                'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
         Thread thread2 = new Thread(new Runnable() {
             @Override
             public void run() {
