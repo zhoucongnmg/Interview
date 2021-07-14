@@ -16,7 +16,7 @@ public class Thread2 {
     private static Lock lock = new ReentrantLock();
     private static Condition condition = lock.newCondition();
 
-    private static int numIndex = 1;
+    private static int numIndex= 1;
     private static int charIndex = 0;
 
     public static void main(String[] args) {
